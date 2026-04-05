@@ -1142,7 +1142,7 @@ async function initTC() {
     const C = typeof TonConnectUI!=='undefined' ? TonConnectUI
             : typeof TON_CONNECT_UI!=='undefined' ? TON_CONNECT_UI.TonConnectUI : null;
     if (!C) return;
-    tonConnectUI = new C({manifestUrl: location.origin+'/tonconnect-manifest.json', buttonRootId:null});
+    tonConnectUI = new C({manifestUrl: location.origin+'/api/manifest', buttonRootId:null});
     tonConnectUI.onStatusChange(w => {
       if (w) { tcW = w.account.address; updW(true); toast('💳 Wallet connected!'); }
       else   { tcW = null; updW(false); }
