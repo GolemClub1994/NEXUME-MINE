@@ -1,5 +1,5 @@
 {
-  "url": "https://nexusmine.vercel.app",
+  "url": "https://neuxmeminegamingnew.vercel.app",
   "name": "NEXUS MINE",
   "iconUrl": "https://nexusmine.vercel.app/icon-192.png"
 }
