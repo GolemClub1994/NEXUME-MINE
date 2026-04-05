@@ -6,6 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#03000A">
 <title>NEXUS MINE ⛏️</title>
+<link rel="icon" href="/icon-192.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#03000A;--v:#7C3AED;--v2:#A855F7;--c:#0891B2;--c2:#22D3EE;--pk:#EC4899;--go:#D97706;--go2:#F59E0B;--go3:#FCD34D;--gr:#059669;--gr2:#10B981;--re:#DC2626;--tx:#F0EDFF;--tx2:rgba(240,237,255,.6);--tx3:rgba(240,237,255,.3);--card:rgba(255,255,255,.04);--cardb:rgba(255,255,255,.09)}
@@ -13,10 +14,8 @@
 html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Rajdhani',sans-serif;color:var(--tx);user-select:none}
 #app{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;max-width:480px;margin:0 auto}
 canvas#bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
-/* TOPBAR */
 #topbar{flex-shrink:0;padding:8px 10px 5px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,1,26,.95),transparent)}
-.tb-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--v),var(--pk));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Orbitron';position:relative}
-.tb-av .rank-dot{position:absolute;bottom:-2px;right:-2px;width:12px;height:12px;border-radius:50%;border:1px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:7px}
+.tb-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--v),var(--pk));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Orbitron'}
 .tb-info{margin-left:6px}
 .tb-name{font-size:11px;font-weight:700;font-family:'Orbitron'}
 .tb-rank{font-size:9px;color:var(--go2);font-family:'Orbitron'}
@@ -24,37 +23,27 @@ canvas#bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
 .sm-btn{width:28px;height:28px;border-radius:50%;border:1px solid rgba(168,85,247,.3);background:rgba(168,85,247,.1);color:var(--v2);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 #wallet-btn{display:flex;align-items:center;gap:2px;background:rgba(0,136,204,.12);border:1px solid rgba(0,136,204,.3);border-radius:16px;padding:3px 8px;font-size:8px;font-weight:700;color:#22D3EE;cursor:pointer;font-family:'Orbitron'}
 #wallet-btn.connected{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.35);color:var(--gr2)}
-/* BALANCE BAR */
-#balbar{flex-shrink:0;margin:0 8px 4px;background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(6,182,212,.08));border:1px solid rgba(168,85,247,.2);border-radius:14px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between}
-.bal-n{font-size:22px;font-weight:900;font-family:'Orbitron';background:linear-gradient(90deg,var(--v2),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#balbar{flex-shrink:0;margin:0 8px 5px;background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(6,182,212,.08));border:1px solid rgba(168,85,247,.2);border-radius:14px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between}
+.bal-n{font-size:20px;font-weight:900;font-family:'Orbitron';background:linear-gradient(90deg,var(--v2),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .bal-sub{font-size:9px;color:var(--tx2)}.bal-sub b{color:var(--go2)}
 .daily-info{text-align:right;font-size:9px;color:var(--tx3)}.daily-info b{color:var(--gr2)}
-/* RANK STRIP — always visible */
-#rankstrip{flex-shrink:0;margin:0 8px 4px;background:rgba(124,58,237,.08);border:1px solid rgba(168,85,247,.15);border-radius:10px;padding:5px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.rs-item{display:flex;align-items:center;gap:4px;font-size:9px;font-family:'Orbitron';color:var(--tx2)}
-.rs-item b{color:var(--v2)}.rs-sep{width:1px;height:14px;background:rgba(168,85,247,.2)}
-/* CONTENT */
 #content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0}
 #content::-webkit-scrollbar{display:none}
 .pnl{display:none;padding:0 8px 8px}.pnl.on{display:block}
 .sechdr{font-size:8px;font-weight:700;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;margin:9px 0 6px;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.04);font-family:'Orbitron'}
-/* NAV */
 #nav{flex-shrink:0;display:flex;background:linear-gradient(0deg,rgba(8,1,26,.98),rgba(8,1,26,.85));border-top:1px solid rgba(168,85,247,.12);padding:2px 0 max(2px,env(safe-area-inset-bottom))}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:2px 0;cursor:pointer;border:none;background:none;color:var(--tx3);font-size:13px}.nb.on{color:var(--v2)}
-.nb-iw{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:.2s}.nb.on .nb-iw{background:rgba(168,85,247,.15)}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:2px 0;cursor:pointer;border:none;background:none;color:var(--tx3);font-size:14px}.nb.on{color:var(--v2)}
+.nb-iw{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;transition:.2s}.nb.on .nb-iw{background:rgba(168,85,247,.15)}
 .nb-l{font-size:6px;font-weight:700;font-family:'Orbitron'}
-/* MINE */
 #tapzone{position:relative;width:160px;height:160px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin:6px auto}
 .oring{position:absolute;border-radius:50%;border:1px solid rgba(168,85,247,.15);animation:os linear infinite;pointer-events:none}
-.oring:nth-child(1){width:158px;height:158px;animation-duration:10s}
-.oring:nth-child(2){width:138px;height:138px;animation-duration:7s;border-style:dashed;border-color:rgba(6,182,212,.15)}
+.oring:nth-child(1){width:158px;height:158px;animation-duration:10s}.oring:nth-child(2){width:138px;height:138px;animation-duration:7s;border-style:dashed;border-color:rgba(6,182,212,.15)}
 @keyframes os{to{transform:rotate(360deg)}}
 #planet{width:100px;height:100px;border-radius:50%;z-index:2;display:flex;align-items:center;justify-content:center;font-size:38px;animation:pb 3s ease-in-out infinite;background:radial-gradient(circle at 30% 25%,#BF7FFF,#7C3AED 42%,#4C1D95 70%,#1A0840);box-shadow:0 0 25px rgba(168,85,247,.6),0 0 50px rgba(168,85,247,.3);transition:.5s}
 @keyframes pb{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12)}}
 #planet.hit{transform:scale(.87)!important}
-.flynum{position:fixed;pointer-events:none;z-index:9999;font-family:'Orbitron';font-weight:900;animation:fup 1s ease-out forwards}
-@keyframes fup{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-100px) scale(.4)}}
-/* CARDS */
+.flynum{position:fixed;pointer-events:none;z-index:9999;font-family:'Orbitron';font-weight:900;animation:fup .9s ease-out forwards}
+@keyframes fup{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-90px) scale(.5)}}
 .cd{background:var(--card);border:1px solid var(--cardb);border-radius:12px;padding:9px;margin-bottom:6px}
 .cd-h{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .cd-em{font-size:24px}.cd-nm{font-size:12px;font-weight:700;font-family:'Orbitron'}.cd-sub{font-size:10px;color:var(--tx2);margin-top:1px}
@@ -62,41 +51,32 @@ canvas#bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
 .btn{padding:6px 12px;border-radius:16px;border:none;cursor:pointer;font-size:9px;font-weight:700;font-family:'Orbitron';min-height:32px;transition:.2s}
 .btn-p{background:linear-gradient(135deg,var(--v),var(--pk));color:#fff;box-shadow:0 0 10px rgba(168,85,247,.4)}.btn-p:active{transform:scale(.94)}
 .btn-g{background:linear-gradient(135deg,var(--go),var(--go2));color:#fff;box-shadow:0 0 10px rgba(245,158,11,.4)}
-.btn-c{background:linear-gradient(135deg,var(--c),var(--c2));color:#fff;box-shadow:0 0 10px rgba(6,182,212,.3)}
 .btn-d{background:rgba(255,255,255,.05);color:var(--tx3);cursor:not-allowed}
 .btn-ok{background:rgba(16,185,129,.15);color:var(--gr2);cursor:default}
-.btn-free{background:linear-gradient(135deg,#059669,#10B981);color:#fff}
 .pbar{height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden;margin:5px 0}
 .pfill{height:100%;border-radius:3px;transition:width .4s}
-/* STORAGE */
 .stor{background:var(--card);border:1px solid var(--cardb);border-radius:12px;padding:8px 10px;margin-bottom:5px}
 .stor-h{display:flex;justify-content:space-between;font-size:9px;color:var(--tx2);font-family:'Orbitron'}.stor-h b{color:var(--tx)}
 #col-btn{width:100%;padding:8px;border-radius:10px;border:none;cursor:pointer;font-size:11px;font-weight:700;font-family:'Orbitron';min-height:38px;transition:.2s}
 #col-btn.rdy{background:linear-gradient(135deg,var(--gr),#047857);color:#fff;box-shadow:0 0 14px rgba(16,185,129,.35)}
 #col-btn.rdy:active{transform:scale(.97)}
 #col-btn.off{background:rgba(255,255,255,.04);color:var(--tx3)}
-/* STATS */
 .tst{display:flex;gap:5px;margin-top:5px}
 .ts{flex:1;background:var(--card);border:1px solid var(--cardb);border-radius:9px;padding:6px;text-align:center}
 .ts-v{font-size:12px;font-weight:700;color:var(--v2);font-family:'Orbitron'}
 .ts-l{font-size:7px;color:var(--tx3);text-transform:uppercase;margin-top:1px}
-/* CLAIM */
 .clm{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(234,179,8,.05));border:1.5px solid rgba(245,158,11,.3);border-radius:16px;padding:12px;margin-bottom:10px}
 .clm-t{font-size:12px;font-weight:900;font-family:'Orbitron';color:var(--go2);margin-bottom:3px}
 .clm-s{font-size:10px;color:var(--tx2);line-height:1.5;margin-bottom:8px}
 .clm-i{display:flex;justify-content:space-between;font-size:10px;color:var(--tx2);margin-bottom:6px;font-family:'Orbitron'}.clm-i b{color:var(--go2)}
-.clm-cd{font-size:16px;font-weight:900;font-family:'Orbitron';color:var(--go3);text-align:center;margin-bottom:6px}
+.clm-cd{font-size:15px;font-weight:900;font-family:'Orbitron';color:var(--go3);text-align:center;margin-bottom:6px}
 .clm-btn{width:100%;padding:10px;border-radius:12px;border:none;cursor:pointer;font-size:11px;font-weight:700;font-family:'Orbitron';min-height:42px;transition:.2s}
 .clm-btn.rdy{background:linear-gradient(135deg,#D97706,#F59E0B);color:#fff;box-shadow:0 0 18px rgba(245,158,11,.4)}.clm-btn.rdy:active{transform:scale(.97)}
-.clm-btn.cd{background:rgba(255,255,255,.05);color:var(--tx3);cursor:not-allowed}
+.clm-btn.cd{background:rgba(255,255,255,.05);color:var(--tx3)}
 .clm-btn.nw{background:rgba(0,136,204,.12);color:var(--c2);cursor:pointer}
-/* RULES & ALERTS */
 .rul{background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.15);border-radius:12px;padding:10px;margin-bottom:8px}
 .rul-t{font-size:10px;font-weight:700;font-family:'Orbitron';color:var(--v2);margin-bottom:4px}
 .rul-i{font-size:10px;color:var(--tx2);line-height:1.6}
-.warn{background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.2);border-radius:10px;padding:8px;margin-bottom:6px;font-size:9px;color:#FCA5A5;line-height:1.5}
-.info-box{background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.2);border-radius:10px;padding:8px;margin-bottom:6px;font-size:9px;color:var(--c2);line-height:1.5}
-/* LEADERBOARD */
 .lb-r{display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:10px;background:var(--card);border:1px solid var(--cardb);margin-bottom:4px}
 .lb-p{font-size:11px;font-weight:900;min-width:22px;text-align:center;font-family:'Orbitron'}
 .lb-p.g{color:var(--go2)}.lb-p.s{color:#CBD5E1}.lb-p.b{color:#CD7F32}
@@ -104,1086 +84,417 @@ canvas#bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
 .lb-me{background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(6,182,212,.08));border:1px solid rgba(168,85,247,.25);border-radius:12px;padding:9px;margin-bottom:8px;display:flex;align-items:center;gap:7px}
 .pr-b{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(234,179,8,.05));border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:10px;margin-bottom:8px}
 .pr-t{font-size:11px;font-weight:900;font-family:'Orbitron';color:var(--go2);margin-bottom:6px}
-.pr-r{display:flex;justify-content:space-between;font-size:10px;color:var(--tx2);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.pr-r{display:flex;justify-content:space-between;font-size:10px;color:var(--tx2);padding:2px 0;border-bottom:1px solid rgba(255,255,255,.03)}
 .pr-r:last-child{border:none}.pr-v{color:var(--go2);font-weight:700}
-/* CREW */
 .cr-h{background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(124,58,237,.1));border:1px solid rgba(236,72,153,.18);border-radius:16px;padding:12px;margin-bottom:8px;text-align:center}
 .cr-t{font-size:15px;font-weight:900;font-family:'Orbitron';background:linear-gradient(90deg,var(--pk),var(--v2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:3px}
 .cr-s{font-size:10px;color:var(--tx2);line-height:1.4;margin-bottom:8px}
 .rl{background:rgba(0,0,0,.25);border:1px solid rgba(168,85,247,.2);border-radius:9px;padding:7px 10px;display:flex;align-items:center;gap:5px;margin-bottom:7px}
 .rl-t{flex:1;font-size:9px;color:var(--v2);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rl-c{padding:4px 9px;border-radius:7px;border:none;cursor:pointer;background:rgba(168,85,247,.18);color:var(--v2);font-size:9px;font-weight:700;font-family:'Orbitron'}
-/* STAKE */
-.stk-hero{background:linear-gradient(135deg,rgba(6,182,212,.12),rgba(124,58,237,.12));border:1.5px solid rgba(6,182,212,.25);border-radius:16px;padding:14px;margin-bottom:10px;text-align:center}
-.stk-t{font-size:14px;font-weight:900;font-family:'Orbitron';background:linear-gradient(90deg,var(--c2),var(--v2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:3px}
-.stk-s{font-size:10px;color:var(--tx2);margin-bottom:10px;line-height:1.5}
-.stk-stat{display:flex;gap:5px;margin-bottom:10px}
-.stk-sv{flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(6,182,212,.15);border-radius:10px;padding:8px;text-align:center}
-.stk-sv-v{font-size:13px;font-weight:900;font-family:'Orbitron';color:var(--c2)}
-.stk-sv-l{font-size:7px;color:var(--tx3);text-transform:uppercase;margin-top:2px}
-.stk-input{width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(6,182,212,.25);border-radius:10px;padding:9px 12px;font-size:13px;font-family:'Orbitron';color:var(--tx);text-align:center;margin-bottom:8px;outline:none}
-.stk-input::placeholder{color:var(--tx3);font-size:11px}
-.stk-btns{display:flex;gap:6px}
-.stk-yield-box{background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(5,150,105,.05));border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:10px;margin-bottom:8px}
-/* RULES */
-.rl-section{background:var(--card);border:1px solid var(--cardb);border-radius:12px;padding:10px;margin-bottom:8px}
-.rl-sec-t{font-size:11px;font-weight:700;font-family:'Orbitron';color:var(--v2);margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.rl-sec-b{font-size:10px;color:var(--tx2);line-height:1.7}
-.rl-sec-b li{margin-left:14px;margin-bottom:2px}
-/* WORLD BADGE */
-.pb{display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(6,182,212,.06));border:1px solid rgba(168,85,247,.18);border-radius:14px;padding:4px 9px;margin-bottom:5px}
-.pb-em{font-size:15px}.pb-nm{font-size:9px;font-weight:700;font-family:'Orbitron';color:var(--v2)}.pb-mt{font-size:8px;color:var(--go2)}
-/* TOAST */
+.fq{background:var(--card);border:1px solid var(--cardb);border-radius:10px;padding:9px;margin-bottom:5px;cursor:pointer}
+.fq-q{font-size:11px;font-weight:700;font-family:'Orbitron';color:var(--v2)}
+.fq-a{font-size:10px;color:var(--tx2);line-height:1.5;margin-top:5px;display:none}
+.fq.open .fq-a{display:block}
 #toast{position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(14px);background:rgba(16,185,129,.9);color:#fff;font-size:10px;font-weight:700;padding:7px 16px;border-radius:24px;z-index:9999;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap;font-family:'Orbitron'}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-/* UNLOCK BADGE */
-.unlock-badge{display:inline-block;background:rgba(16,185,129,.15);color:var(--gr2);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:2px 6px;font-size:7px;font-family:'Orbitron';font-weight:700}
-.unlock-timer{display:inline-block;background:rgba(245,158,11,.12);color:var(--go2);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:2px 6px;font-size:7px;font-family:'Orbitron';font-weight:700}
-@media(max-width:374px){.bal-n{font-size:18px}#tapzone{width:130px;height:130px}#planet{width:85px;height:85px;font-size:32px}}
+.pb{display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(6,182,212,.06));border:1px solid rgba(168,85,247,.18);border-radius:14px;padding:4px 9px;margin-bottom:5px}
+.pb-em{font-size:15px}.pb-nm{font-size:9px;font-weight:700;font-family:'Orbitron';color:var(--v2)}.pb-mt{font-size:8px;color:var(--go2)}
+@media(max-width:374px){.bal-n{font-size:17px}#tapzone{width:130px;height:130px}#planet{width:85px;height:85px;font-size:32px}}
 </style>
 </head>
 <body>
 <canvas id="bgc"></canvas>
 <div id="app">
-
-<!-- TOPBAR -->
 <div id="topbar">
   <div style="display:flex;align-items:center">
-    <div class="tb-av" id="av">NM<div class="rank-dot" id="rankdot">⛏️</div></div>
-    <div class="tb-info"><div class="tb-name" id="pname">Miner</div><div class="tb-rank" id="prank">⛏️ Novice</div></div>
+    <div class="tb-av" id="av">NM</div>
+    <div class="tb-info"><div class="tb-name" id="pname">Miner</div><div class="tb-rank" id="prank">Rank #—</div></div>
   </div>
   <div class="top-btns">
     <div id="wallet-btn" onclick="connectWallet()">💳 <span id="wl">Wallet</span></div>
     <button class="sm-btn" id="snd-btn" onclick="toggleSnd()">🔊</button>
   </div>
 </div>
-
-<!-- BALANCE BAR -->
 <div id="balbar">
-  <div>
-    <div class="bal-n" id="bdisp">0</div>
-    <div class="bal-sub">Points · Tap: <b id="tv-d">+1,000</b> · Real: <b id="real-eq">0</b> $NXS</div>
-  </div>
-  <div class="daily-info">
-    <div>Today: <b id="de">0</b></div>
-    <div>Cap: <b id="dc2">500</b> $NXS/day</div>
-    <div style="margin-top:2px"><b id="cap-pct">0%</b> filled</div>
-  </div>
+  <div><div class="bal-n" id="bdisp">0</div><div class="bal-sub">$NEXUS · Tap: <b id="tv-d">+10</b> · Real: <b id="real-eq">0</b></div></div>
+  <div class="daily-info"><div>Today: <b id="de">0</b>/<b id="dc">1M</b></div><div>Cap: <b id="dc2">100</b> real/day</div></div>
 </div>
-
-<!-- RANK STRIP -->
-<div id="rankstrip">
-  <div class="rs-item"><span id="rs-icon">⛏️</span>&nbsp;<b id="rs-rank">Novice</b></div>
-  <div class="rs-sep"></div>
-  <div class="rs-item">📊 Score: <b id="rs-score">0</b></div>
-  <div class="rs-sep"></div>
-  <div class="rs-item">🏆 <b id="rs-pos">#?</b></div>
-  <div class="rs-sep"></div>
-  <div class="rs-item">📅 Day <b id="rs-day">1</b></div>
-</div>
-
-<!-- CONTENT -->
 <div id="content">
-
   <!-- MINE -->
   <div class="pnl on" id="p-mine">
-    <div class="pb"><span class="pb-em" id="pbe">⛏️</span><div style="flex:1"><div class="pb-nm" id="pbn">NEXUS PRIME</div><div class="pb-mt" id="pbm">1x · Tap: 1,000 · Cap 500 $NXS/day</div></div><span style="font-size:8px;color:var(--tx3)" id="pbw">Weapon Lv.1</span></div>
-    <div class="stor"><div class="stor-h"><span>📦 PASSIVE STORAGE (3h)</span><span><b id="scc">0</b>/<b id="scm">0</b></span></div><div class="pbar"><div class="pfill" id="scf" style="width:0%;background:linear-gradient(90deg,var(--v),var(--c2))"></div></div></div>
+    <div class="pb"><span class="pb-em" id="pbe">⛏️</span><div style="flex:1"><div class="pb-nm" id="pbn">NEXUS PRIME</div><div class="pb-mt" id="pbm">1x · Cap 100/day</div></div><span style="font-size:8px;color:var(--tx3)" id="pbw">Weapon Lv.1</span></div>
+    <div class="stor"><div class="stor-h"><span>📦 PASSIVE STORAGE (3h)</span><span><b id="scc">0</b>/<b id="scm">300</b></span></div><div class="pbar"><div class="pfill" id="scf" style="width:0%;background:linear-gradient(90deg,var(--v),var(--c2))"></div></div></div>
     <button id="col-btn" class="off" onclick="collectP()">⬇️ Mining in progress...</button>
-    <div id="tapzone" ontouchstart="doTap(event)" onclick="doTap(event)">
-      <div class="oring"></div><div class="oring"></div>
-      <div id="planet">⛏️</div>
-    </div>
+    <div id="tapzone" ontouchstart="doTap(event)" onclick="doTap(event)"><div class="oring"></div><div class="oring"></div><div id="planet">⛏️</div></div>
     <div class="tst">
       <div class="ts"><div class="ts-v" id="t-taps">0</div><div class="ts-l">TAPS TODAY</div></div>
-      <div class="ts"><div class="ts-v" id="t-score">0</div><div class="ts-l">SCORE/MO</div></div>
+      <div class="ts"><div class="ts-v" id="t-rank">#?</div><div class="ts-l">YOUR RANK</div></div>
       <div class="ts"><div class="ts-v" id="t-real">0</div><div class="ts-l">REAL $NXS</div></div>
     </div>
   </div>
-
   <!-- SHOP -->
   <div class="pnl" id="p-shop">
-    <div class="sechdr">⚔️ WEAPON UPGRADE</div>
-    <div class="info-box">🔓 Weapons unlock <b>free every 2 days</b> of play. Boost with $NEXUS for instant access. Higher weapons = bigger leaderboard score!</div>
-    <div id="w-list"></div>
-    <div class="sechdr">🪐 WORLDS</div>
-    <div class="info-box">🌍 Worlds <b>boost your leaderboard score</b> (not real token cap). World 2 unlocks free on Day 4, World 3 on Day 10.</div>
-    <div id="wo-list"></div>
-    <div class="sechdr">💎 PREMIUM PACKAGES</div>
-    <div id="sh-list"></div>
+    <div class="sechdr">⚔️ WEAPON UPGRADE</div><div id="w-list"></div>
+    <div class="sechdr">🪐 WORLDS</div><div id="wo-list"></div>
+    <div class="sechdr">💎 PREMIUM PACKAGES</div><div id="sh-list"></div>
   </div>
-
-  <!-- STAKE — NEXUS OVERDRIVE -->
-  <div class="pnl" id="p-stake">
-    <div class="stk-hero">
-      <div class="stk-t">⚡ NEXUS OVERDRIVE</div>
-      <div class="stk-s">Stake your points and earn <b style="color:var(--c2)">3% monthly</b> passive yield.<br>Yield is credited to your virtual balance every session.</div>
-      <div class="stk-stat">
-        <div class="stk-sv"><div class="stk-sv-v" id="stk-staked">0</div><div class="stk-sv-l">Staked Pts</div></div>
-        <div class="stk-sv"><div class="stk-sv-v" id="stk-yield">0</div><div class="stk-sv-l">Yield Earned</div></div>
-        <div class="stk-sv"><div class="stk-sv-v" style="color:var(--gr2)">3%</div><div class="stk-sv-l">Monthly APY</div></div>
-      </div>
-      <input class="stk-input" id="stk-input" type="number" placeholder="Enter amount to stake (in points)">
-      <div class="stk-btns">
-        <button class="btn btn-c" style="flex:1" onclick="doStake()">⚡ STAKE</button>
-        <button class="btn btn-d" style="flex:1" id="stk-unstake-btn" onclick="doUnstake()">↩ UNSTAKE ALL</button>
-      </div>
-    </div>
-    <div class="stk-yield-box">
-      <div style="font-size:11px;font-weight:700;font-family:'Orbitron';color:var(--gr2);margin-bottom:5px">📈 ACCUMULATED YIELD</div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <div id="stk-yield-disp" style="font-size:18px;font-weight:900;font-family:'Orbitron';color:var(--gr2)">0</div>
-          <div style="font-size:8px;color:var(--tx3)">points ready to claim</div>
-        </div>
-        <button class="btn btn-g" onclick="claimStakeYield()">💰 CLAIM YIELD</button>
-      </div>
-    </div>
-    <div class="rul">
-      <div class="rul-t">📋 STAKING RULES</div>
-      <div class="rul-i">
-        • Stake your in-game points to earn 3% monthly yield<br>
-        • Yield accumulates continuously, claim anytime<br>
-        • Unstake anytime — no lockup period<br>
-        • Staked points count toward your total score<br>
-        • 5% platform fee applied on stake deposits
-      </div>
-    </div>
-  </div>
-
   <!-- VAULT -->
   <div class="pnl" id="p-vault">
     <div class="clm">
-      <div class="clm-t">💎 ON-CHAIN CLAIM (REAL $NEXUS)</div>
-      <div class="clm-s">
-        Convert points to <b>real $NEXUS</b> on the TON blockchain.<br>
-        Rate: <b>10,000 pts = 1 real $NEXUS</b> · Cooldown: <b>96 hours (4 days)</b><br>
-        Daily cap: <b>500 real $NEXUS/day</b>
-      </div>
-      <div class="warn">⚠️ <b>LEADERBOARD RULE:</b> Performing an on-chain claim <b>permanently disqualifies you</b> from the Monthly Leaderboard (2.5M $NEXUS prize) for the current month. Think before claiming!</div>
-      <div class="clm-i"><span>Balance: <b id="cb">0</b> pts</span><span>= <b id="cr">0</b> real $NXS</span></div>
-      <div class="clm-i"><span>Total claimed: <b id="ct">0</b> real</span><span>Next claim in:</span></div>
+      <div class="clm-t">💎 CLAIM REAL $NEXUS</div>
+      <div class="clm-s">Convert mined tokens to <b>real on-chain $NEXUS</b>.<br>Rate: 10,000 in-game = 1 real $NEXUS.<br>Min: 700 real $NEXUS (7,000,000 in-game) · Every 72h.</div>
+      <div class="rul"><div class="rul-t">⚠️ IMPORTANT</div><div class="rul-i">Claiming removes you from the monthly 400K leaderboard prize pool!<br><a href="https://gaspump.tg/#/token/trade?token_address=EQBH_DOKvvJ7soxzf4QGPOvEuJR3IvM_jXvQfSRmfNaN86DU" target="_blank" style="color:var(--c2);text-decoration:none">Buy $NEXUS on GasPump ↗</a></div></div>
+      <div class="clm-i"><span>Balance: <b id="cb">0</b></span><span>= <b id="cr">0</b> real</span></div>
+      <div class="clm-i"><span>Claimed total: <b id="ct">0</b></span><span></span></div>
       <div class="clm-cd" id="ccd">--:--:--</div>
-      <button class="clm-btn cd" id="cbtn" onclick="claimReal()">💳 CONNECT WALLET TO CLAIM</button>
+      <button class="clm-btn cd" id="cbtn" onclick="claimReal()">💳 CONNECT WALLET</button>
     </div>
-    <div class="sechdr">📦 VIRTUAL VAULT</div>
+    <div class="sechdr">📦 PENDING REWARDS</div>
     <div id="vl"></div>
-    <button class="btn btn-g" style="width:100%;margin-bottom:8px" onclick="claimAll()">⚡ COLLECT ALL FROM VAULT</button>
-    <div class="sechdr">📋 FULL GAME RULES</div>
-    <div class="rul">
-      <div class="rul-t">⏱️ CLAIM SYSTEM</div>
-      <div class="rul-i">On-chain withdrawals are available every 96 hours (4 days). The daily hard cap is 500 real $NEXUS regardless of upgrades. Rate: 10,000 points = 1 $NEXUS.</div>
-    </div>
-    <div class="rul">
-      <div class="rul-t">🏆 LEADERBOARD EXCLUSION</div>
-      <div class="rul-i">Any on-chain claim in a calendar month disqualifies you from the 2.5M $NEXUS monthly prize. If you want to compete, do not claim real tokens this month.</div>
-    </div>
-    <div class="rul">
-      <div class="rul-t">⚔️ WEAPONS &amp; WORLDS</div>
-      <div class="rul-i">Weapons and Worlds increase your leaderboard score multiplier. They do NOT increase the 500 $NEXUS/day real token cap. Higher tiers = faster path to daily cap + bigger monthly score.</div>
-    </div>
-    <div class="rul">
-      <div class="rul-t">📈 STAKING YIELD</div>
-      <div class="rul-i">Staking earns 3% monthly on deposited points, credited to your virtual balance. Claim yield anytime. 5% platform fee on deposits.</div>
-    </div>
+    <button class="btn btn-g" style="width:100%;margin-bottom:8px" onclick="claimAll()">⚡ COLLECT ALL</button>
   </div>
-
   <!-- RANK -->
   <div class="pnl" id="p-rank">
     <div class="pr-b">
-      <div class="pr-t">🏆 MONTHLY — 2,500,000 $NEXUS PRIZE POOL</div>
-      <div class="pr-r"><span>🥇 1st Place</span><span class="pr-v">750,000</span></div>
-      <div class="pr-r"><span>🥈 2nd Place</span><span class="pr-v">500,000</span></div>
-      <div class="pr-r"><span>🥉 3rd Place</span><span class="pr-v">250,000</span></div>
-      <div class="pr-r"><span>4th – 5th</span><span class="pr-v">150,000 each</span></div>
-      <div class="pr-r"><span>6th – 10th</span><span class="pr-v">80,000 each</span></div>
-      <div class="pr-r"><span>11th – 30th</span><span class="pr-v">15,000 each</span></div>
-      <div style="font-size:9px;color:var(--re);margin-top:6px;font-style:italic">⚠️ On-chain claim in current month = permanently excluded from leaderboard.</div>
-      <div style="font-size:9px;color:var(--tx3);margin-top:3px">📊 Score is based on total monthly taps × weapon × world bonus. Worlds 2 & 3 give +80% / +120% score boost.</div>
+      <div class="pr-t">🏆 MONTHLY — 400K $NEXUS PRIZE</div>
+      <div class="pr-r"><span>🥇 1st</span><span class="pr-v">70,000</span></div>
+      <div class="pr-r"><span>🥈 2nd</span><span class="pr-v">50,000</span></div>
+      <div class="pr-r"><span>🥉 3rd</span><span class="pr-v">30,000</span></div>
+      <div class="pr-r"><span>4th</span><span class="pr-v">20,000</span></div>
+      <div class="pr-r"><span>5th</span><span class="pr-v">10,000</span></div>
+      <div class="pr-r"><span>6th-10th</span><span class="pr-v">20,000 each</span></div>
+      <div class="pr-r"><span>11th-20th</span><span class="pr-v">8,000 each</span></div>
+      <div class="pr-r"><span>21st-30th</span><span class="pr-v">4,000 each</span></div>
+      <div style="font-size:9px;color:var(--re);margin-top:4px;font-style:italic">⚠️ Real claim in 30-day period = excluded from leaderboard.</div>
     </div>
     <div class="sechdr">YOUR POSITION</div><div class="lb-me" id="lm"></div>
-    <div class="sechdr">TOP MINERS (Live Leaderboard)</div><div id="ll"></div>
-    <div style="text-align:center;font-size:9px;color:var(--tx3);padding:10px">Leaderboard updates every 30s. Score = taps × world multiplier.</div>
+    <div class="sechdr">TOP MINERS (updated from server)</div><div id="ll"></div>
+    <div style="text-align:center;font-size:9px;color:var(--tx3);padding:10px">Leaderboard syncs with server every time you play.</div>
   </div>
-
   <!-- CREW -->
   <div class="pnl" id="p-crew">
-    <div class="cr-h">
-      <div style="font-size:36px;margin-bottom:4px">🚀</div>
-      <div class="cr-t">Recruit Your Crew</div>
-      <div class="cr-s">+500,000 pts for every friend you invite.<br>They get +200,000 pts welcome bonus.</div>
+    <div class="cr-h"><div style="font-size:36px;margin-bottom:4px">🚀</div><div class="cr-t">Recruit Your Crew</div><div class="cr-s">+500 $NEXUS for every friend.<br>They get +200 $NEXUS welcome bonus.</div>
       <div class="rl"><span class="rl-t" id="rlt">t.me/nexusmine_bot?ref=XXXX</span><button class="rl-c" onclick="copyRef()">COPY</button></div>
       <button class="btn btn-p" style="width:100%" onclick="shareRef()">📤 Share on Telegram</button>
     </div>
     <div style="display:flex;gap:5px;margin-bottom:8px">
       <div class="ts" style="flex:1"><div class="ts-v" id="rc">0</div><div class="ts-l">FRIENDS</div></div>
-      <div class="ts" style="flex:1"><div class="ts-v" id="rb">0</div><div class="ts-l">EARNED (pts)</div></div>
+      <div class="ts" style="flex:1"><div class="ts-v" id="rb">0</div><div class="ts-l">EARNED</div></div>
     </div>
     <div style="text-align:center;padding:8px"><a href="https://t.me/+uN0OslW1m2djNWM8" target="_blank" style="color:var(--c2);font-size:11px;font-family:'Orbitron';text-decoration:none">📢 Join Telegram Channel ↗</a></div>
   </div>
-
-  <!-- RULES -->
-  <div class="pnl" id="p-rules">
-    <div style="text-align:center;padding:10px 0 6px">
-      <div style="font-size:28px">📖</div>
-      <div style="font-size:13px;font-weight:900;font-family:'Orbitron';color:var(--v2)">HOW TO PLAY</div>
-      <div style="font-size:9px;color:var(--tx3);margin-top:2px">Complete rules & mechanics</div>
-    </div>
-    <div class="rl-section">
-      <div class="rl-sec-t">⛏️ MINING</div>
-      <div class="rl-sec-b">Tap the planet to earn in-game points. Each tap gives:
-        <ul style="margin-top:4px">
-          <li>Base points from your weapon level</li>
-          <li>7% chance of a critical hit (3× points)</li>
-          <li>Points accumulate up to the daily hard cap</li>
-        </ul>
-        A <b>passive storage</b> fills over 3 hours — collect it anytime to add those points to your balance.
-      </div>
-    </div>
-    <div class="rl-section">
-      <div class="rl-sec-t">⏱️ CLAIM WINDOWS</div>
-      <div class="rl-sec-b">
-        <b>Virtual Collect (every 3h):</b> Tap the collect button to move passive storage into your balance. This is off-chain and instant.<br><br>
-        <b>On-Chain Withdrawal (every 96h):</b> Converts your points to real $NEXUS on TON. Rate: 10,000 pts = 1 $NEXUS. <b>Disqualifies you from leaderboard!</b><br><br>
-        <b>Daily Hard Cap:</b> Maximum 500 real $NEXUS earned per day. Resets at midnight UTC.
-      </div>
-    </div>
-    <div class="rl-section">
-      <div class="rl-sec-t">🏆 MONTHLY LEADERBOARD</div>
-      <div class="rl-sec-b">
-        Prize pool: <b style="color:var(--go2)">2,500,000 $NEXUS</b> distributed to top 30 players each month.<br><br>
-        Ranking is by <b>monthly score</b> (taps × world bonus). World 2 gives +80% score, World 3 gives +120% score.<br><br>
-        <b style="color:var(--re)">⚠️ Any on-chain claim this month = permanently excluded from this month's prize.</b>
-      </div>
-    </div>
-    <div class="rl-section">
-      <div class="rl-sec-t">⚔️ WEAPONS (Progressive Unlock)</div>
-      <div class="rl-sec-b">
-        <ul>
-          <li><b>Mk.I</b> — Free from Day 1 — 1,000 pts/tap</li>
-          <li><b>Mk.II</b> — Free on Day 2 or boost instantly — 2,500 pts/tap</li>
-          <li><b>Mk.III</b> — Free on Day 4 or boost instantly — 5,000 pts/tap</li>
-          <li><b>Mk.IV</b> — Free on Day 6 or boost instantly — 8,000 pts/tap</li>
-          <li><b>Mk.V</b> — Free on Day 8 or boost instantly — 12,000 pts/tap</li>
-        </ul>
-        Higher weapons fill the daily cap faster (not more total tokens).
-      </div>
-    </div>
-    <div class="rl-section">
-      <div class="rl-sec-t">🪐 WORLDS (Leaderboard Boost)</div>
-      <div class="rl-sec-b">
-        <ul>
-          <li><b>World 1 — Nexus Prime</b>: Free. Baseline score (1×).</li>
-          <li><b>World 2 — Igneos</b>: Free on Day 4 or boost — +80% leaderboard score (1.8×).</li>
-          <li><b>World 3 — Nova Core</b>: Free on Day 10 or boost — +120% leaderboard score (2.2×).</li>
-        </ul>
-        Worlds do NOT increase real token earnings. They only boost your monthly leaderboard score.
-      </div>
-    </div>
-    <div class="rl-section">
-      <div class="rl-sec-t">⚡ STAKING — NEXUS OVERDRIVE</div>
-      <div class="rl-sec-b">
-        Stake your in-game points to earn <b>3% monthly yield</b> (36% APY).<br><br>
-        Yield accumulates every session and is credited to your balance when you claim it. Unstake anytime. 5% platform fee applied on deposits.
-      </div>
-    </div>
-    <div class="rl-section">
-      <div class="rl-sec-t">👥 REFERRALS</div>
-      <div class="rl-sec-b">
-        Share your link and earn <b>+500,000 pts</b> per friend. Each new player gets <b>+200,000 pts</b> welcome bonus.
-      </div>
-    </div>
-    <div class="rl-section">
-      <div class="rl-sec-t">🏅 RANK TIERS</div>
-      <div class="rl-sec-b">
-        <ul>
-          <li>⛏️ <b>Novice</b> — Starting rank</li>
-          <li>🔷 <b>Miner</b> — 1M+ total points</li>
-          <li>💜 <b>Explorer</b> — 5M+ total points</li>
-          <li>💎 <b>Elite</b> — 20M+ total points</li>
-          <li>🌟 <b>Master</b> — 100M+ total points</li>
-          <li>🔮 <b>Legend</b> — 500M+ total points</li>
-          <li>💠 <b>Plasma Diamond</b> — 2B+ total points (MAX RANK)</li>
-        </ul>
-      </div>
-    </div>
-    <div style="text-align:center;padding:12px;font-size:8px;color:var(--tx3)">
-      Buy $NEXUS on <a href="https://gaspump.tg/#/token/trade?token_address=EQBH_DOKvvJ7soxzf4QGPOvEuJR3IvM_jXvQfSRmfNaN86DU" target="_blank" style="color:var(--c2);text-decoration:none">GasPump ↗</a>
-    </div>
-  </div>
-
-</div><!-- /content -->
-
-<!-- NAV -->
+  <!-- FAQ -->
+  <div class="pnl" id="p-faq"><div class="sechdr">❓ FAQ</div><div id="fl"></div></div>
+</div>
 <div id="nav">
   <button class="nb on" id="n-mine" onclick="sw('mine')"><div class="nb-iw">⛏️</div><span class="nb-l">MINE</span></button>
   <button class="nb" id="n-shop" onclick="sw('shop')"><div class="nb-iw">🛒</div><span class="nb-l">SHOP</span></button>
-  <button class="nb" id="n-stake" onclick="sw('stake')"><div class="nb-iw">⚡</div><span class="nb-l">STAKE</span></button>
   <button class="nb" id="n-vault" onclick="sw('vault')"><div class="nb-iw">📦</div><span class="nb-l">VAULT</span></button>
   <button class="nb" id="n-rank" onclick="sw('rank')"><div class="nb-iw">🏆</div><span class="nb-l">RANK</span></button>
   <button class="nb" id="n-crew" onclick="sw('crew')"><div class="nb-iw">👥</div><span class="nb-l">CREW</span></button>
-  <button class="nb" id="n-rules" onclick="sw('rules')"><div class="nb-iw">📖</div><span class="nb-l">RULES</span></button>
+  <button class="nb" id="n-faq" onclick="sw('faq')"><div class="nb-iw">❓</div><span class="nb-l">FAQ</span></button>
 </div>
-</div><!-- /app -->
+</div>
 <div id="toast"></div>
-
 <script>
-// ═══════════════════════════════════════════════════════
-//  NEXUS MINE v10 — Full Game Engine
-// ═══════════════════════════════════════════════════════
-
-const TOKEN   = 'EQBH_DOKvvJ7soxzf4QGPOvEuJR3IvM_jXvQfSRmfNaN86DU';
-const TBUY    = 'https://gaspump.tg/#/token/trade?token_address=' + TOKEN;
-const TGCH    = 'https://t.me/+uN0OslW1m2djNWM8';
-const DEVW    = 'UQAOsFEKdjnYUO133YkeHsuPJc_HTjaaR6pdeVcekh1Tv8Bz';
-
-// ── Core Math ──
-const CONV          = 10000;        // 10,000 pts = 1 real $NEXUS
-const CLMCD         = 345600000;    // 96h on-chain claim cooldown
-const MINCLM        = 1000000;      // min 100 real $NEXUS (1M pts) to claim
-const PASCD         = 10800000;     // 3h passive collect cooldown
-const DAILY_CAP_REAL= 500;          // 500 real $NEXUS hard cap/day
-const DEV_FEE       = 0.05;         // 5% platform fee
-const STAKE_RATE    = 0.03;         // 3% monthly staking yield
-const MS_PER_MONTH  = 2592000000;   // 30 days in ms
-
-// ── Worlds ──
-const WORLDS = [
-  {id:'nexus',  name:'Nexus Prime', em:'⛏️', lbBonus:0,   freeDays:0,  boostCost:0,
-   bg:'radial-gradient(circle at 30% 25%,#BF7FFF,#7C3AED 42%,#4C1D95 70%,#1A0840)'},
-  {id:'igneos', name:'Igneos',      em:'🔥', lbBonus:0.8, freeDays:4,  boostCost:10000000,
-   bg:'radial-gradient(circle at 30% 25%,#FFA07A,#DC2626 42%,#7F1D1D 70%,#2D0A0A)'},
-  {id:'nova',   name:'Nova Core',   em:'⭐', lbBonus:1.2, freeDays:10, boostCost:25000000,
-   bg:'radial-gradient(circle at 30% 25%,#FEF08A,#EAB308 42%,#78350F 70%,#1C0A00)'}
+const TOKEN='EQBH_DOKvvJ7soxzf4QGPOvEuJR3IvM_jXvQfSRmfNaN86DU';
+const TBUY='https://gaspump.tg/#/token/trade?token_address='+TOKEN;
+const TGCH='https://t.me/+uN0OslW1m2djNWM8';
+const DEVW='UQAOsFEKdjnYUO133YkeHsuPJc_HTjaaR6pdeVcekh1Tv8Bz';
+const CONV=10000;// 10k ingame=1 real
+const CLMCD=259200000;//72h
+const MINCLM=7000000;//700 real=7M ingame
+const PASCD=10800000;//3h
+const WORLDS=[
+  {id:'nexus',name:'Nexus Prime',em:'⛏️',mult:1,cost:0,capReal:100,bg:'radial-gradient(circle at 30% 25%,#BF7FFF,#7C3AED 42%,#4C1D95 70%,#1A0840)'},
+  {id:'igneos',name:'Igneos',em:'🔥',mult:2,cost:0,capReal:200,bg:'radial-gradient(circle at 30% 25%,#FFA07A,#DC2626 42%,#7F1D1D 70%,#2D0A0A)'},
+  {id:'nova',name:'Nova Core',em:'⭐',mult:3,cost:5000000,capReal:300,bg:'radial-gradient(circle at 30% 25%,#FEF08A,#EAB308 42%,#78350F 70%,#1C0A00)'}
+];
+const WLV=[
+  {lv:1,tap:10,cost:0,nm:'Laser Drill Mk.I',ds:'+10/tap base'},
+  {lv:2,tap:15,cost:500000,nm:'Laser Drill Mk.II',ds:'+15/tap base'},
+  {lv:3,tap:22,cost:1500000,nm:'Laser Drill Mk.III',ds:'+22/tap base'},
+  {lv:4,tap:30,cost:4000000,nm:'Laser Drill Mk.IV',ds:'+30/tap base'},
+  {lv:5,tap:40,cost:10000000,nm:'Laser Drill Mk.V',ds:'+40/tap base'}
+];
+const SHOPITEMS=[
+  {id:'plasma',nm:'⚡ Plasma Core',ds:'Doubles tap power permanently. Daily cap → 500 real $NEXUS.',cost:8000000,type:'perm',eff:'tapMult2'},
+  {id:'shield',nm:'🛡️ Energy Shield',ds:'Triples passive income speed. Fills storage 3x faster.',cost:3000000,type:'perm',eff:'passiveMult3'},
+  {id:'boost24',nm:'🚀 Star Boost 24h',ds:'2x tap power for 24 hours. Stackable with Plasma Core.',cost:1000000,type:'temp',dur:86400000,eff:'boost2x'}
+];
+const FAQS=[
+  {q:'How do I earn $NEXUS?',a:'Tap the planet! Each tap gives points based on weapon level × world multiplier. You also earn passively (collect every 3h). Daily cap limits how much you can earn per day.'},
+  {q:'How long can I play per day?',a:'World 1 with base weapon: ~5-6 hours of tapping. With upgrades: 1-3 hours. You can always tap but stop earning when you hit the daily cap. Cap resets at midnight UTC.'},
+  {q:'How does the real claim work?',a:'10,000 in-game $NEXUS = 1 real $NEXUS on TON blockchain. Min 700 real (7M in-game). Cooldown: 72 hours. Goes directly to your connected TON wallet.'},
+  {q:'What is the monthly leaderboard?',a:'400,000 $NEXUS prize pool. Top 30 miners who did NOT claim real tokens in the 30-day period win prizes. Claiming = excluded.'},
+  {q:'What does Plasma Core do?',a:'Doubles your tap power and raises daily cap to 500 real $NEXUS/day. Permanent upgrade. Costs 800 real $NEXUS (8M in-game).'},
+  {q:'How do I unlock Nova Core (World 3)?',a:'Buy it in SHOP for 500 real $NEXUS (5M in-game). Gives 3x earnings with 300/day cap (or 500/day with Plasma Core).'},
+  {q:'How do referrals work?',a:'Share your link. Each friend = +500 in-game $NEXUS for you, +200 for them.'},
+  {q:'Where can I buy/sell $NEXUS?',a:'GasPump: '+TBUY}
 ];
 
-// ── Weapons ── (tap = points/tap base)
-const WLV = [
-  {lv:1, tap:1000,  cost:0,        freeDays:0, nm:'Laser Drill Mk.I',   ds:'1,000 pts/tap · Baseline'},
-  {lv:2, tap:2500,  cost:1000000,  freeDays:2, nm:'Laser Drill Mk.II',  ds:'2,500 pts/tap · 2× faster cap fill'},
-  {lv:3, tap:5000,  cost:3000000,  freeDays:4, nm:'Laser Drill Mk.III', ds:'5,000 pts/tap · 5× faster cap fill'},
-  {lv:4, tap:8000,  cost:7000000,  freeDays:6, nm:'Laser Drill Mk.IV',  ds:'8,000 pts/tap · 8× faster cap fill'},
-  {lv:5, tap:12000, cost:15000000, freeDays:8, nm:'Laser Drill Mk.V',   ds:'12,000 pts/tap · Max power'}
-];
-
-// ── Premium Shop ──
-const SHOPITEMS = [
-  {id:'plasma',  nm:'⚡ Plasma Core',     ds:'2× tap power permanently. Stacks with weapon level.',        cost:8000000,  type:'perm', eff:'tapMult2'},
-  {id:'shield',  nm:'🛡️ Energy Shield',   ds:'3× passive income speed. Storage fills 3× faster.',          cost:3000000,  type:'perm', eff:'passiveMult3'},
-  {id:'boost24', nm:'🚀 Star Boost 24h',  ds:'2× tap power for 24 hours. Stackable with Plasma Core.',     cost:1000000,  type:'temp', dur:86400000, eff:'boost2x'}
-];
-
-// ── Rank Tiers ──
-const RANKS = [
-  {min:0,          name:'Novice',        icon:'⛏️', color:'#888'},
-  {min:1000000,    name:'Miner',         icon:'🔷', color:'#22D3EE'},
-  {min:5000000,    name:'Explorer',      icon:'💜', color:'#A855F7'},
-  {min:20000000,   name:'Elite',         icon:'💎', color:'#7C3AED'},
-  {min:100000000,  name:'Master',        icon:'🌟', color:'#F59E0B'},
-  {min:500000000,  name:'Legend',        icon:'🔮', color:'#EC4899'},
-  {min:2000000000, name:'Plasma Diamond',icon:'💠', color:'#BF7FFF'}
-];
-
-// ═══ STATE ═══
-let S = {}, audioCtx = null, sndOn = true, myRankPos = null;
-
-function initS() {
-  try { S = JSON.parse(localStorage.getItem('nxs_v10') || '{}'); } catch(e) { S = {}; }
-  const d = {
-    bal:0, totalEarned:0, totalTaps:0, weaponLv:1, world:'nexus',
-    unlocked:['nexus'], vault:[], refs:0, refCode:rc(), pname:null,
-    storedP:0, lastPT:Date.now(), lastClm:0, totalClm:0, walletAddr:null,
-    dk:dk(), de:0, mk:mk(), ms:0, mClm:false, lastCol:0,
-    items:{}, boosts:{}, dayTaps:0,
-    startDate:Date.now(),           // for progressive unlocks
-    stakedV:0,                      // staked virtual points
-    lastStakeTS:Date.now(),         // last staking reward timestamp
-    pendingYield:0,                 // accumulated yield not yet claimed
-    ss:Date.now()
-  };
-  Object.keys(d).forEach(k => { if (S[k] === undefined) S[k] = d[k]; });
-  if (S.dk !== dk()) { S.dk = dk(); S.de = 0; S.dayTaps = 0; }
-  if (S.mk !== mk()) { S.mk = mk(); S.ms = 0; S.mClm = false; }
-  if (!Array.isArray(S.unlocked)) S.unlocked = ['nexus'];
-  if (!Array.isArray(S.vault))    S.vault = [];
-  if (!S.items)  S.items  = {};
-  if (!S.boosts) S.boosts = {};
-  if (!S.startDate) S.startDate = Date.now();
-  // World 1 always unlocked
-  if (!S.unlocked.includes('nexus')) S.unlocked.push('nexus');
+let S={},audioCtx=null,sndOn=true;
+function initS(){
+  try{S=JSON.parse(localStorage.getItem('nxs_v9')||'{}')}catch(e){S={}}
+  const d={bal:0,totalEarned:0,totalTaps:0,weaponLv:1,world:'nexus',unlocked:['nexus','igneos'],
+    vault:[],refs:0,refCode:rc(),pname:null,storedP:0,lastPT:Date.now(),lastClm:0,totalClm:0,
+    walletAddr:null,dk:dk(),de:0,mk:mk(),me:0,mClm:false,lastCol:0,
+    items:{},boosts:{},dayTaps:0,ss:Date.now()};
+  Object.keys(d).forEach(k=>{if(S[k]===undefined)S[k]=d[k]});
+  if(S.dk!==dk()){S.dk=dk();S.de=0;S.dayTaps=0}
+  if(S.mk!==mk()){S.mk=mk();S.me=0;S.mClm=false}
+  if(!Array.isArray(S.unlocked))S.unlocked=['nexus','igneos'];
+  if(!Array.isArray(S.vault))S.vault=[];
+  if(!S.items)S.items={};if(!S.boosts)S.boosts={};
   save();
 }
+function rc(){return Math.random().toString(36).substring(2,8).toUpperCase()}
+function dk(){return new Date().toISOString().slice(0,10)}
+function mk(){return new Date().toISOString().slice(0,7)}
+function save(){try{localStorage.setItem('nxs_v9',JSON.stringify(S))}catch(e){}}
+function fmt(n){return Math.floor(n||0).toLocaleString('en-US')}
+function fS(n){n=Math.floor(n||0);if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return n+''}
 
-function rc()  { return Math.random().toString(36).substring(2, 8).toUpperCase(); }
-function dk()  { return new Date().toISOString().slice(0, 10); }
-function mk()  { return new Date().toISOString().slice(0, 7); }
-function save(){ try { localStorage.setItem('nxs_v10', JSON.stringify(S)); } catch(e) {} }
-function fmt(n){ return Math.floor(n||0).toLocaleString('en-US'); }
-function fS(n) { n = Math.floor(n||0); if(n>=1e9)return(n/1e9).toFixed(2)+'B'; if(n>=1e6)return(n/1e6).toFixed(1)+'M'; if(n>=1e3)return(n/1e3).toFixed(1)+'K'; return n+''; }
-
-// ═══ GAME HELPERS ═══
-function gW()   { return WORLDS.find(w => w.id === S.world) || WORLDS[0]; }
-function gWL()  { return WLV[(S.weaponLv||1)-1] || WLV[0]; }
-function daysPlaying() { return Math.max(1, Math.floor((Date.now() - (S.startDate||Date.now())) / 86400000) + 1); }
-
-function tapV() {
-  let b = gWL().tap;
-  if (S.items.plasma)      b *= 2;
-  if (hasBoost('boost2x')) b *= 2;
-  return Math.floor(b);
-}
-
-// Score per tap = tapV × world leaderboard bonus
-function scoreV() {
-  return Math.floor(tapV() * (1 + gW().lbBonus));
-}
-
-function capIG()  { return DAILY_CAP_REAL * CONV; }  // 5,000,000 pts/day
-function canEarn(){ return S.de < capIG(); }
-function hasBoost(id) { return S.boosts[id] && S.boosts[id] > Date.now(); }
-function passRate() { let r = tapV() * 6; if (S.items.shield) r *= 3; return r; } // pts/hour
-
-function getRankInfo(score) {
-  let rank = RANKS[0];
-  for (const r of RANKS) { if (score >= r.min) rank = r; }
-  return rank;
-}
-
-function canUnlockWeaponFree(lv) {
-  const w = WLV[lv-1];
-  if (!w) return false;
-  return w.freeDays === 0 || daysPlaying() >= w.freeDays;
-}
-
-function canUnlockWorldFree(id) {
-  const w = WORLDS.find(x => x.id === id);
-  if (!w) return false;
-  return w.freeDays === 0 || daysPlaying() >= w.freeDays;
-}
+function gW(){return WORLDS.find(w=>w.id===S.world)||WORLDS[0]}
+function gWL(){return WLV[(S.weaponLv||1)-1]||WLV[0]}
+function tapV(){let b=gWL().tap*gW().mult;if(S.items.plasma)b*=2;if(hasBoost('boost2x'))b*=2;return Math.floor(b)}
+function capR(){let c=gW().capReal;if(S.items.plasma)c=Math.max(c,500);return c}
+function capIG(){return capR()*CONV}
+function canEarn(){return S.de<capIG()}
+function hasBoost(id){return S.boosts[id]&&S.boosts[id]>Date.now()}
+function passRate(){let r=tapV()*8;if(S.items.shield)r*=3;return r}//per hour
 
 // ═══ SOUND ═══
-function initAud() {
-  const A = window.AudioContext || window.webkitAudioContext;
-  if (!A) return;
-  const u = () => { if (!audioCtx) try { audioCtx = new A(); } catch(e) {} };
-  document.addEventListener('touchstart', u, {once:true});
-  document.addEventListener('click', u, {once:true});
-}
-function toggleSnd() {
-  sndOn = !sndOn;
-  document.getElementById('snd-btn').textContent = sndOn ? '🔊' : '🔇';
-  toast(sndOn ? '🔊 Sound ON' : '🔇 Sound OFF');
-}
-function playSnd(type) {
-  if (!sndOn || !audioCtx) return;
-  try {
-    const t = audioCtx.currentTime, o = audioCtx.createOscillator(), g = audioCtx.createGain();
-    o.connect(g); g.connect(audioCtx.destination);
-    if (type === 'crit') {
-      o.type = 'sine'; o.frequency.setValueAtTime(880, t); o.frequency.exponentialRampToValueAtTime(1760, t+.05);
-      g.gain.setValueAtTime(.3, t); g.gain.exponentialRampToValueAtTime(.001, t+.3); o.start(t); o.stop(t+.3);
-      const o2 = audioCtx.createOscillator(), g2 = audioCtx.createGain();
-      o2.connect(g2); g2.connect(audioCtx.destination); o2.type = 'sine';
-      o2.frequency.setValueAtTime(2637, t+.02); g2.gain.setValueAtTime(.15, t+.02);
-      g2.gain.exponentialRampToValueAtTime(.001, t+.25); o2.start(t+.02); o2.stop(t+.25);
-    } else if (type === 'col') {
-      [0,.08,.16].forEach((d,i) => {
-        const f=[523,659,784][i], oo=audioCtx.createOscillator(), gg=audioCtx.createGain();
-        oo.connect(gg); gg.connect(audioCtx.destination); oo.type='sine';
-        oo.frequency.setValueAtTime(f, t+d); gg.gain.setValueAtTime(.2, t+d);
-        gg.gain.exponentialRampToValueAtTime(.001, t+d+.2); oo.start(t+d); oo.stop(t+d+.2);
-      });
-    } else {
-      o.type='sine'; o.frequency.setValueAtTime(900,t); o.frequency.exponentialRampToValueAtTime(420,t+.06);
-      g.gain.setValueAtTime(.2,t); g.gain.exponentialRampToValueAtTime(.001,t+.08); o.start(t); o.stop(t+.08);
-    }
-  } catch(e) {}
+function initAud(){const A=window.AudioContext||window.webkitAudioContext;if(!A)return;const u=()=>{if(!audioCtx)try{audioCtx=new A()}catch(e){}};document.addEventListener('touchstart',u,{once:true});document.addEventListener('click',u,{once:true})}
+function toggleSnd(){sndOn=!sndOn;document.getElementById('snd-btn').textContent=sndOn?'🔊':'🔇';toast(sndOn?'🔊 Sound ON':'🔇 Sound OFF')}
+function playSnd(type){
+  if(!sndOn||!audioCtx)return;
+  try{const t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);
+  if(type==='crit'){o.type='sine';o.frequency.setValueAtTime(880,t);o.frequency.exponentialRampToValueAtTime(1760,t+.05);g.gain.setValueAtTime(.3,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.start(t);o.stop(t+.3);
+    const o2=audioCtx.createOscillator(),g2=audioCtx.createGain();o2.connect(g2);g2.connect(audioCtx.destination);o2.type='sine';o2.frequency.setValueAtTime(2637,t+.02);g2.gain.setValueAtTime(.15,t+.02);g2.gain.exponentialRampToValueAtTime(.001,t+.25);o2.start(t+.02);o2.stop(t+.25)
+  }else if(type==='col'){[0,.08,.16].forEach((d,i)=>{const f=[523,659,784][i],oo=audioCtx.createOscillator(),gg=audioCtx.createGain();oo.connect(gg);gg.connect(audioCtx.destination);oo.type='sine';oo.frequency.setValueAtTime(f,t+d);gg.gain.setValueAtTime(.2,t+d);gg.gain.exponentialRampToValueAtTime(.001,t+d+.2);oo.start(t+d);oo.stop(t+d+.2)})
+  }else{o.type='sine';o.frequency.setValueAtTime(900,t);o.frequency.exponentialRampToValueAtTime(420,t+.06);g.gain.setValueAtTime(.2,t);g.gain.exponentialRampToValueAtTime(.001,t+.08);o.start(t);o.stop(t+.08);
+    const o2=audioCtx.createOscillator(),g2=audioCtx.createGain();o2.connect(g2);g2.connect(audioCtx.destination);o2.type='sine';o2.frequency.setValueAtTime(220,t);o2.frequency.exponentialRampToValueAtTime(60,t+.05);g2.gain.setValueAtTime(.12,t);g2.gain.exponentialRampToValueAtTime(.001,t+.05);o2.start(t);o2.stop(t+.05)}
+  }catch(e){}
 }
 
 // ═══ TAP ═══
-let tapLock = false;
-function doTap(e) {
-  if (tapLock) return; tapLock = true; setTimeout(() => tapLock = false, 50);
-  e.preventDefault();
-  if (!canEarn()) { toast('📊 Daily cap reached! Come back tomorrow.'); return; }
-  const tv = tapV(), sv = scoreV(), rem = capIG() - S.de, crit = Math.random() < .07;
-  let amt = Math.min(tv, rem);
-  if (crit) amt = Math.min(amt * 3, rem);
-  if (amt <= 0) return;
-  // Score gets crit bonus too
-  const scoreAmt = Math.floor(crit ? sv * 3 : sv);
-  S.bal         += amt;
-  S.totalEarned += amt;
-  S.totalTaps++;
-  S.de          += amt;
-  S.ms          += scoreAmt;
-  S.dayTaps++;
-  save();
-  const pl = document.getElementById('planet');
-  pl.classList.add('hit'); setTimeout(() => pl.classList.remove('hit'), 75);
-  if (navigator.vibrate) navigator.vibrate(crit ? [15,5,15] : 8);
-  playSnd(crit ? 'crit' : 'tap');
-  const tc = e.touches ? e.touches[0] : e;
-  const f = document.createElement('div'); f.className = 'flynum';
-  if (crit) {
-    f.style.cssText = `left:${tc.clientX-55}px;top:${tc.clientY-14}px;font-size:18px;color:#FCD34D;filter:drop-shadow(0 0 8px #F59E0B)`;
-    f.textContent = `⚡CRIT +${fS(amt)}`;
-  } else {
-    f.style.cssText = `left:${tc.clientX-28}px;top:${tc.clientY-14}px;font-size:15px;color:#E9D5FF;text-shadow:0 0 5px #A855F7`;
-    f.textContent = `+${fS(amt)}`;
-  }
-  document.body.appendChild(f); setTimeout(() => f.remove(), 1000);
+let tapLock=false;
+function doTap(e){
+  if(tapLock)return;tapLock=true;setTimeout(()=>tapLock=false,55);e.preventDefault();
+  if(!canEarn()){toast('📊 Daily cap reached! Come back tomorrow.');return}
+  const tv=tapV(),rem=capIG()-S.de,crit=Math.random()<.07;
+  let amt=Math.min(tv,rem);
+  if(crit)amt=Math.min(amt*3,rem);
+  if(amt<=0)return;
+  S.bal+=amt;S.totalEarned+=amt;S.totalTaps++;S.de+=amt;S.me+=amt;S.dayTaps++;save();
+  const pl=document.getElementById('planet');pl.classList.add('hit');setTimeout(()=>pl.classList.remove('hit'),75);
+  if(navigator.vibrate)navigator.vibrate(crit?[15,5,15]:8);
+  playSnd(crit?'crit':'tap');
+  const tc=e.touches?e.touches[0]:e;
+  const f=document.createElement('div');f.className='flynum';
+  if(crit){f.style.cssText=`left:${tc.clientX-45}px;top:${tc.clientY-14}px;font-size:18px;color:#FCD34D;filter:drop-shadow(0 0 8px #F59E0B)`;f.textContent=`⚡CRIT +${fS(amt)}`}
+  else{f.style.cssText=`left:${tc.clientX-22}px;top:${tc.clientY-14}px;font-size:14px;color:#E9D5FF;text-shadow:0 0 5px #A855F7`;f.textContent=`+${fS(amt)}`}
+  document.body.appendChild(f);setTimeout(()=>f.remove(),900);
   ui();
 }
 
 // ═══ PASSIVE ═══
-function tickP() {
-  const now = Date.now(), hrs = (now - S.lastPT) / 3600000, rate = passRate();
-  const maxStor = rate * 3, earned = Math.floor(Math.min(hrs, 3) * rate);
-  const capRem = capIG() - S.de;
-  const actual = Math.min(earned, capRem, maxStor - (S.storedP||0));
-  if (actual > 0) { S.storedP = (S.storedP||0) + actual; S.lastPT = now; save(); }
+function tickP(){
+  const now=Date.now(),hrs=(now-S.lastPT)/3600000,rate=passRate();
+  const maxStor=rate*3,earned=Math.floor(Math.min(hrs,3)*rate);
+  const capRem=capIG()-S.de;
+  const actual=Math.min(earned,capRem,maxStor-(S.storedP||0));
+  if(actual>0){S.storedP=(S.storedP||0)+actual;S.lastPT=now;save()}
 }
-
-function collectP() {
-  tickP();
-  const sp = S.storedP || 0;
-  if (sp < 1) { toast('📦 Storage empty — mining...'); return; }
-  const now = Date.now();
-  if (now - (S.lastCol||0) < PASCD) {
-    const r = PASCD - (now - S.lastCol);
-    toast(`⏳ Collect in ${Math.ceil(r/60000)}m`);
-    return;
-  }
-  const capRem = capIG() - S.de, a = Math.min(sp, capRem);
-  if (a < 1) { toast('📊 Daily cap reached!'); return; }
-  const scoreAmt = Math.floor(a * (1 + gW().lbBonus));
-  S.vault.push({id:'v'+now, label:'📦 Passive Mining', amount:a, ts:now});
-  S.ms       += scoreAmt;
-  S.storedP   = 0;
-  S.lastPT    = now;
-  S.lastCol   = now;
-  save(); playSnd('col'); toast(`📦 ${fS(a)} pts → Vault!`); ui();
+function collectP(){
+  tickP();const sp=S.storedP||0;
+  if(sp<1){toast('📦 Storage empty — mining...');return}
+  const now=Date.now();
+  if(now-(S.lastCol||0)<PASCD){const r=PASCD-(now-S.lastCol);toast(`⏳ Collect in ${Math.ceil(r/60000)}m`);return}
+  const capRem=capIG()-S.de;const a=Math.min(sp,capRem);
+  if(a<1){toast('📊 Daily cap reached!');return}
+  S.vault.push({id:'v'+now,label:'⛏️ Passive Mining',amount:a,ts:now});
+  S.storedP=0;S.lastPT=now;S.lastCol=now;save();playSnd('col');toast(`📦 ${fS(a)} → Vault!`);ui();
 }
 
 // ═══ VAULT ═══
-function renderV() {
-  const el = document.getElementById('vl'); if (!el) return;
-  if (!S.vault.length) {
-    el.innerHTML = '<div style="text-align:center;padding:14px;color:var(--tx3)"><div style="font-size:28px;margin-bottom:6px">📭</div><div style="font-size:11px;font-family:Orbitron">Vault empty — mine & collect!</div></div>';
-    return;
-  }
-  el.innerHTML = '';
-  [...S.vault].reverse().forEach(v => {
-    const d = document.createElement('div');
-    d.className = 'cd';
-    d.style.cssText = 'display:flex;align-items:center;gap:8px;padding:7px';
-    d.innerHTML = `<div style="flex:1"><div style="font-size:10px;font-weight:700;font-family:Orbitron">${v.label}</div><div style="font-size:8px;color:var(--tx3)">${new Date(v.ts).toLocaleTimeString()}</div></div><div style="font-size:12px;font-weight:900;color:var(--go2);font-family:Orbitron">${fS(v.amount)}</div><button class="btn btn-p" style="padding:4px 8px;font-size:8px" onclick="clV('${v.id}')">GET</button>`;
+function renderV(){
+  const el=document.getElementById('vl');if(!el)return;
+  if(!S.vault.length){el.innerHTML='<div style="text-align:center;padding:16px;color:var(--tx3)"><div style="font-size:28px;margin-bottom:6px">📭</div><div style="font-size:11px;font-family:Orbitron">Vault empty — mine & collect!</div></div>';return}
+  el.innerHTML='';[...S.vault].reverse().forEach(v=>{
+    const d=document.createElement('div');d.className='cd';d.style.cssText='display:flex;align-items:center;gap:8px;padding:7px';
+    d.innerHTML=`<div style="flex:1"><div style="font-size:10px;font-weight:700;font-family:Orbitron">${v.label}</div><div style="font-size:8px;color:var(--tx3)">${new Date(v.ts).toLocaleTimeString()}</div></div><div style="font-size:12px;font-weight:900;color:var(--go2);font-family:Orbitron">${fS(v.amount)}</div><button class="btn btn-p" style="padding:4px 8px;font-size:8px" onclick="clV('${v.id}')">GET</button>`;
     el.appendChild(d);
   });
 }
-
-function clV(id) {
-  const i = S.vault.findIndex(v => v.id === id); if (i < 0) return;
-  const v = S.vault.splice(i, 1)[0];
-  S.bal += v.amount; S.de += v.amount;
-  save(); playSnd('col'); toast(`✅ +${fS(v.amount)} pts`); renderV(); ui();
-}
-
-function claimAll() {
-  if (!S.vault.length) return;
-  const t = S.vault.reduce((a,v) => a + v.amount, 0);
-  S.bal += t; S.de += t; S.vault = [];
-  save(); playSnd('col'); toast(`🎉 +${fS(t)} pts collected!`); renderV(); ui();
-}
+function clV(id){const i=S.vault.findIndex(v=>v.id===id);if(i<0)return;const v=S.vault.splice(i,1)[0];S.bal+=v.amount;S.de+=v.amount;S.me+=v.amount;save();playSnd('col');toast(`✅ +${fS(v.amount)}`);renderV();ui()}
+function claimAll(){if(!S.vault.length)return;const t=S.vault.reduce((a,v)=>a+v.amount,0);S.bal+=t;S.de+=t;S.me+=t;S.vault=[];save();playSnd('col');toast(`🎉 +${fS(t)} collected!`);renderV();ui()}
 
 // ═══ REAL CLAIM ═══
-let tonConnectUI = null, tcW = null;
-
-function connectWallet() {
-  if (tonConnectUI) {
-    if (tcW) {
-      if (confirm(tcW.slice(0,6)+'…'+tcW.slice(-4)+'\nDisconnect wallet?')) {
-        tonConnectUI.disconnect().catch(()=>{});
-        tcW = null; updW(false);
-      }
-    } else {
-      tonConnectUI.openModal().catch(() => toast('💳 Connecting...'));
-    }
-  } else {
-    toast('💳 Loading wallet...'); setTimeout(initTC, 500);
-  }
+let tonConnectUI=null,tcW=null;
+function connectWallet(){
+  if(tonConnectUI){if(tcW){if(confirm(tcW.slice(0,6)+'…'+tcW.slice(-4)+'\nDisconnect?')){tonConnectUI.disconnect().catch(()=>{});tcW=null;updW(false)}}else{tonConnectUI.openModal().catch(()=>toast('💳 Connecting...'))}}
+  else{toast('💳 Loading...');setTimeout(initTC,500)}
 }
-
-function updW(c) {
-  const b = document.getElementById('wallet-btn'), l = document.getElementById('wl');
-  if (!b || !l) return;
-  if (c && tcW) {
-    b.classList.add('connected');
-    l.textContent = tcW.slice(0,4) + '…' + tcW.slice(-4);
-    S.walletAddr = tcW; save();
-  } else {
-    b.classList.remove('connected');
-    l.textContent = 'Wallet';
-  }
+function updW(c){const b=document.getElementById('wallet-btn'),l=document.getElementById('wl');if(!b||!l)return;if(c&&tcW){b.classList.add('connected');l.textContent=tcW.slice(0,4)+'…'+tcW.slice(-4);S.walletAddr=tcW;save()}else{b.classList.remove('connected');l.textContent='Wallet'}}
+function updClm(){
+  const b=document.getElementById('cbtn'),cd=document.getElementById('ccd'),bl=document.getElementById('cb'),rl=document.getElementById('cr'),tl=document.getElementById('ct');
+  if(!b)return;
+  if(bl)bl.textContent=fS(S.bal);if(rl)rl.textContent=fS(Math.floor(S.bal/CONV));if(tl)tl.textContent=fS(S.totalClm||0);
+  const el=Date.now()-(S.lastClm||0),rdy=el>=CLMCD,rem=Math.max(0,CLMCD-el);
+  if(!tcW){b.className='clm-btn nw';b.textContent='💳 Connect Wallet to Claim';if(cd)cd.textContent=''}
+  else if(rdy&&S.bal>=MINCLM){const real=Math.floor(S.bal/CONV);b.className='clm-btn rdy';b.textContent=`🎉 CLAIM ${fS(real)} real $NEXUS`;if(cd)cd.textContent='✅ READY!'}
+  else if(!rdy){b.className='clm-btn cd';b.textContent='⏳ Cooldown...';if(cd){const h=Math.floor(rem/3600000),m=Math.floor((rem%3600000)/60000),s=Math.floor((rem%60000)/1000);cd.textContent=h+'h '+m+'m '+s+'s'}}
+  else{const need=Math.ceil(MINCLM/CONV);b.className='clm-btn cd';b.textContent=`⛏️ Need ${fS(MINCLM)} (${need} real)`;if(cd)cd.textContent=Math.min(100,Math.floor(S.bal/MINCLM*100))+'% there'}
 }
-
-function updClm() {
-  const b = document.getElementById('cbtn'), cd = document.getElementById('ccd');
-  const bl = document.getElementById('cb'), rl = document.getElementById('cr'), tl = document.getElementById('ct');
-  if (!b) return;
-  if (bl) bl.textContent = fS(S.bal);
-  if (rl) rl.textContent = fS(Math.floor(S.bal / CONV));
-  if (tl) tl.textContent = fS(S.totalClm||0);
-  const el = Date.now() - (S.lastClm||0), rdy = el >= CLMCD, rem = Math.max(0, CLMCD - el);
-  if (!tcW) {
-    b.className = 'clm-btn nw'; b.textContent = '💳 Connect Wallet to Claim';
-    if (cd) cd.textContent = '';
-  } else if (rdy && S.bal >= MINCLM) {
-    const real = Math.floor(S.bal / CONV);
-    b.className = 'clm-btn rdy'; b.textContent = `🎉 CLAIM ${fS(real)} real $NEXUS`;
-    if (cd) cd.textContent = '✅ READY!';
-  } else if (!rdy) {
-    b.className = 'clm-btn cd'; b.textContent = '⏳ On-chain cooldown...';
-    if (cd) {
-      const h = Math.floor(rem/3600000), m = Math.floor((rem%3600000)/60000), s2 = Math.floor((rem%60000)/1000);
-      cd.textContent = h+'h '+m+'m '+s2+'s';
-    }
-  } else {
-    const need = Math.ceil(MINCLM / CONV);
-    b.className = 'clm-btn cd'; b.textContent = `⛏️ Need ${fS(MINCLM)} pts (${need} real)`;
-    if (cd) cd.textContent = Math.min(100, Math.floor(S.bal / MINCLM * 100)) + '% there';
-  }
-}
-
-async function claimReal() {
-  if (!tcW) { connectWallet(); return; }
-  if (Date.now() - (S.lastClm||0) < CLMCD) { toast('⏳ 96h cooldown active'); return; }
-  if (S.bal < MINCLM) { toast(`⛏️ Need at least ${fS(MINCLM)} pts!`); return; }
-  // Warn about leaderboard disqualification
-  if (!S.mClm && !confirm('⚠️ WARNING\n\nClaiming real $NEXUS will permanently EXCLUDE you from this month\'s 2.5M $NEXUS leaderboard prize.\n\nProceed with on-chain claim?')) return;
-  const amt = Math.floor(S.bal), b = document.getElementById('cbtn');
-  if (b) { b.className = 'clm-btn cd'; b.textContent = '⏳ Processing...'; }
-  try {
-    const r = await fetch('/api/claim', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({userId:S.refCode, wallet:tcW, amount:amt, totalTaps:S.totalTaps, totalEarned:S.totalEarned})
-    });
-    const d = await r.json();
-    if (d.success) {
-      S.bal = Math.max(0, S.bal - (d.deducted||amt));
-      S.lastClm  = Date.now();
-      S.totalClm = (S.totalClm||0) + (d.onChainAmount||Math.floor(amt/CONV));
-      S.mClm     = true;
-      save(); playSnd('col'); toast(d.message || '🎉 Claimed!');
-    } else { toast('⚠️ '+(d.error||'Failed')); }
-  } catch(e) {
-    S.lastClm = Date.now(); S.bal = 0; S.mClm = true;
-    S.totalClm = (S.totalClm||0) + Math.floor(amt/CONV);
-    save(); toast('📡 Claim queued — tx pending');
-  }
-  updClm(); ui();
-}
-
-// ═══ STAKING ═══
-function tickStake() {
-  if (!S.stakedV || S.stakedV <= 0) return;
-  const now   = Date.now();
-  const elapsed = now - (S.lastStakeTS || now);
-  if (elapsed <= 0) return;
-  const fraction = elapsed / MS_PER_MONTH;
-  const yield_pts = Math.floor(S.stakedV * STAKE_RATE * fraction);
-  if (yield_pts >= 1) {
-    S.pendingYield  = (S.pendingYield||0) + yield_pts;
-    S.lastStakeTS   = now;
-    save();
-  }
-}
-
-function doStake() {
-  const inp = document.getElementById('stk-input');
-  const raw = parseInt(inp.value, 10);
-  if (!raw || raw < 1000) { toast('⚠️ Min stake: 1,000 pts'); return; }
-  if (raw > S.bal) { toast('⚠️ Not enough points'); return; }
-  tickStake();
-  const fee    = Math.floor(raw * DEV_FEE);
-  const staked = raw - fee;
-  S.bal       -= raw;
-  S.stakedV    = (S.stakedV||0) + staked;
-  if (!S.lastStakeTS || S.lastStakeTS === 0) S.lastStakeTS = Date.now();
-  inp.value = '';
-  // Log fee to backend silently
-  sendFee('stake_deposit', raw, fee).catch(()=>{});
-  save(); playSnd('col'); toast(`⚡ ${fS(staked)} pts staked! (${fS(fee)} platform fee)`);
-  renderStake(); ui();
-}
-
-function doUnstake() {
-  if (!S.stakedV || S.stakedV <= 0) { toast('Nothing staked.'); return; }
-  tickStake();
-  S.bal     += S.stakedV;
-  S.stakedV  = 0;
-  save(); toast(`↩ Unstaked — ${fS(S.stakedV)} returned`); renderStake(); ui();
-}
-
-function claimStakeYield() {
-  tickStake();
-  const y = Math.floor(S.pendingYield||0);
-  if (y < 1) { toast('📈 No yield to claim yet'); return; }
-  S.bal          += y;
-  S.totalEarned  += y;
-  S.ms           += y;
-  S.pendingYield  = 0;
-  save(); playSnd('col'); toast(`💰 +${fS(y)} yield claimed!`); renderStake(); ui();
-}
-
-function renderStake() {
-  tickStake();
-  const stEl = document.getElementById('stk-staked');
-  const yEl  = document.getElementById('stk-yield');
-  const ydEl = document.getElementById('stk-yield-disp');
-  const ubtn = document.getElementById('stk-unstake-btn');
-  if (stEl) stEl.textContent = fS(S.stakedV||0);
-  if (yEl)  yEl.textContent  = fS(S.pendingYield||0);
-  if (ydEl) ydEl.textContent = fS(S.pendingYield||0);
-  if (ubtn) {
-    ubtn.className = S.stakedV > 0 ? 'btn btn-p' : 'btn btn-d';
-    ubtn.textContent = S.stakedV > 0 ? `↩ UNSTAKE ${fS(S.stakedV)}` : '↩ UNSTAKE ALL';
-  }
+async function claimReal(){
+  if(!tcW){connectWallet();return}
+  if(Date.now()-(S.lastClm||0)<CLMCD){toast('⏳ Cooldown');return}
+  if(S.bal<MINCLM){toast(`⛏️ Need ${fS(MINCLM)} in-game $NEXUS!`);return}
+  const amt=Math.floor(S.bal),b=document.getElementById('cbtn');
+  if(b){b.className='clm-btn cd';b.textContent='⏳ Sending...'}
+  try{
+    const r=await fetch('/api/claim',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:S.refCode,wallet:tcW,amount:amt,totalTaps:S.totalTaps,totalEarned:S.totalEarned})});
+    const d=await r.json();
+    if(d.success){S.bal=Math.max(0,S.bal-(d.deducted||amt));S.lastClm=Date.now();S.totalClm=(S.totalClm||0)+(d.onChainAmount||Math.floor(amt/CONV));S.mClm=true;save();playSnd('col');toast(d.message||'🎉 Claimed!')}
+    else toast('⚠️ '+(d.error||'Failed'))
+  }catch(e){S.lastClm=Date.now();S.bal=0;S.mClm=true;S.totalClm=(S.totalClm||0)+Math.floor(amt/CONV);save();toast('📡 Queued')}
+  updClm();ui();
 }
 
 // ═══ SHOP ═══
-function renderShop() {
-  const days = daysPlaying();
+function renderShop(){
   // Weapons
-  const wl = document.getElementById('w-list');
-  if (wl) {
-    wl.innerHTML = '';
-    WLV.forEach(w => {
-      const own     = S.weaponLv >= w.lv;
-      const nxt     = S.weaponLv === w.lv - 1;
-      const freeOk  = nxt && canUnlockWeaponFree(w.lv);
-      const boostOk = nxt && S.bal >= w.cost && !freeOk;
-      const daysLeft= w.freeDays > 0 ? Math.max(0, w.freeDays - days) : 0;
-      const d = document.createElement('div'); d.className = 'cd';
-      d.style.borderColor = own ? 'rgba(168,85,247,.35)' : nxt ? 'rgba(245,158,11,.25)' : 'var(--cardb)';
-      let badge = '';
-      if (own) badge = '<span class="unlock-badge">✅ OWNED</span>';
-      else if (freeOk && nxt) badge = '<span class="unlock-badge">🔓 FREE!</span>';
-      else if (w.freeDays > 0 && nxt) badge = `<span class="unlock-timer">Day ${w.freeDays} (${daysLeft}d left)</span>`;
-      let btn = '';
-      if (own) btn = '<span class="btn btn-ok" style="font-size:8px">EQUIPPED</span>';
-      else if (freeOk && nxt) btn = `<button class="btn btn-free" onclick="buyW(${w.lv})">🔓 UNLOCK FREE</button>`;
-      else if (nxt && S.bal >= w.cost) btn = `<button class="btn btn-g" onclick="buyW(${w.lv})">⚡ ${fS(w.cost)}</button>`;
-      else if (nxt) btn = `<button class="btn btn-d">${w.freeDays>0?`Day ${w.freeDays} or `:''}${fS(w.cost)} pts</button>`;
-      else btn = `<span style="color:var(--tx3);font-size:8px">Lv.${w.lv}</span>`;
-      d.innerHTML = `<div class="cd-h"><div class="cd-em">${own?'⚔️':'🔒'}</div><div style="flex:1"><div class="cd-nm">${w.nm} ${badge}</div><div class="cd-sub">${w.ds}</div></div></div><div class="cd-ft"><span style="font-size:9px;color:var(--tx3)">${w.freeDays>0?`Free on Day ${w.freeDays}`:'Default'}</span>${btn}</div>`;
-      wl.appendChild(d);
-    });
-  }
+  const wl=document.getElementById('w-list');if(wl){wl.innerHTML='';WLV.forEach(w=>{
+    const own=S.weaponLv>=w.lv,nxt=S.weaponLv===w.lv-1,can=nxt&&S.bal>=w.cost;
+    const d=document.createElement('div');d.className='cd';d.style.borderColor=own?'rgba(168,85,247,.35)':nxt?'rgba(245,158,11,.25)':'var(--cardb)';
+    d.innerHTML=`<div class="cd-h"><div class="cd-em">${own?'⛏️':'🔒'}</div><div style="flex:1"><div class="cd-nm">${w.nm}${own?' ✅':''}</div><div class="cd-sub">${w.ds} · ×world mult${S.items.plasma?' ×2 Plasma':''}</div></div>${own?'<span style="color:var(--gr2);font-size:9px">OWNED</span>':nxt?`<button class="btn ${can?'btn-p':'btn-d'}" onclick="buyW(${w.lv})">${can?'⚡ '+fS(w.cost):'🔒 '+fS(w.cost)}</button>`:'<span style="color:var(--tx3);font-size:8px">Lv.'+w.lv+'</span>'}</div>`;
+    wl.appendChild(d);
+  })}
   // Worlds
-  const wo = document.getElementById('wo-list');
-  if (wo) {
-    wo.innerHTML = '';
-    WORLDS.forEach(w => {
-      const un      = S.unlocked.includes(w.id);
-      const cur     = S.world === w.id;
-      const freeOk  = !un && canUnlockWorldFree(w.id);
-      const boostOk = !un && S.bal >= w.boostCost;
-      const daysLeft= w.freeDays > 0 ? Math.max(0, w.freeDays - days) : 0;
-      const d = document.createElement('div'); d.className = 'cd';
-      d.style.borderColor = cur ? 'rgba(168,85,247,.4)' : un ? 'rgba(16,185,129,.25)' : 'var(--cardb)';
-      let badge = w.lbBonus > 0 ? `<span class="unlock-badge" style="background:rgba(168,85,247,.15);color:var(--v2)">+${Math.round(w.lbBonus*100)}% SCORE</span>` : '';
-      let btn = '';
-      if (cur) btn = '<span class="btn btn-ok">📍 ACTIVE</span>';
-      else if (un) btn = `<button class="btn btn-p" onclick="flyW('${w.id}')">🚀 FLY THERE</button>`;
-      else if (freeOk) btn = `<button class="btn btn-free" onclick="unlW('${w.id}',true)">🔓 UNLOCK FREE</button>`;
-      else if (boostOk) btn = `<button class="btn btn-g" onclick="unlW('${w.id}',false)">⚡ BOOST ${fS(w.boostCost)}</button>`;
-      else btn = `<button class="btn btn-d">${w.freeDays>0?`Day ${w.freeDays} (${daysLeft}d) or `:''} ${fS(w.boostCost)} pts</button>`;
-      d.innerHTML = `<div class="cd-h"><div class="cd-em">${w.em}</div><div style="flex:1"><div class="cd-nm">${w.name} ${badge}</div><div class="cd-sub">Leaderboard bonus: +${Math.round(w.lbBonus*100)}% · Daily cap stays 500 $NXS</div></div></div><div class="cd-ft"><span style="font-size:9px;color:var(--tx3)">${w.freeDays?`Free Day ${w.freeDays}`:'Default World'}</span>${btn}</div>`;
-      wo.appendChild(d);
-    });
-  }
+  const wo=document.getElementById('wo-list');if(wo){wo.innerHTML='';WORLDS.forEach(w=>{
+    const un=S.unlocked.includes(w.id),cur=S.world===w.id,can=!un&&S.bal>=w.cost;
+    const d=document.createElement('div');d.className='cd';d.style.borderColor=cur?'rgba(168,85,247,.4)':un?'rgba(16,185,129,.25)':'var(--cardb)';
+    const cR=w.capReal+(S.items.plasma?200:0);
+    d.innerHTML=`<div class="cd-h"><div class="cd-em">${w.em}</div><div style="flex:1"><div class="cd-nm">${w.name}</div><div class="cd-sub">${w.mult}x earnings · Cap ${cR} real/day</div></div></div><div class="cd-ft"><span style="font-size:9px;color:var(--tx2)">${w.cost?fS(w.cost)+' to unlock':'Free'}</span>${cur?'<span class="btn btn-ok">📍 HERE</span>':un?`<button class="btn btn-p" onclick="flyW('${w.id}')">🚀 FLY</button>`:can?`<button class="btn btn-g" onclick="unlW('${w.id}')">🔓 UNLOCK</button>`:`<button class="btn btn-d">🔒 ${fS(w.cost)}</button>`}</div>`;
+    wo.appendChild(d);
+  })}
   // Premium
-  const sh = document.getElementById('sh-list');
-  if (sh) {
-    sh.innerHTML = '';
-    SHOPITEMS.forEach(si => {
-      const own = si.type === 'perm' && S.items[si.id];
-      const act = si.type === 'temp' && hasBoost(si.id);
-      const can = S.bal >= si.cost;
-      const d = document.createElement('div'); d.className = 'cd';
-      if (own||act) d.style.borderColor = 'rgba(6,182,212,.4)';
-      d.innerHTML = `<div class="cd-h"><div style="font-size:20px">${si.nm.split(' ')[0]}</div><div style="flex:1"><div class="cd-nm">${si.nm}</div><div class="cd-sub">${si.ds}</div><div style="font-size:9px;color:var(--go2);font-family:'Orbitron';margin-top:2px">${fS(si.cost)} pts (${fS(Math.floor(si.cost/CONV))} real)</div></div></div><div class="cd-ft"><span></span>${own?'<span class="btn btn-ok">✅ OWNED</span>':act?'<span class="btn btn-ok">⚡ ACTIVE</span>':can?`<button class="btn btn-g" onclick="buySI('${si.id}')">BUY</button>`:`<button class="btn btn-d">🔒 ${fS(si.cost-S.bal)} short</button>`}</div>`;
-      sh.appendChild(d);
-    });
-  }
+  const sh=document.getElementById('sh-list');if(sh){sh.innerHTML='';SHOPITEMS.forEach(si=>{
+    const own=si.type==='perm'&&S.items[si.id],act=si.type==='temp'&&hasBoost(si.id),can=S.bal>=si.cost;
+    const d=document.createElement('div');d.className='cd';if(own||act)d.style.borderColor='rgba(6,182,212,.4)';
+    d.innerHTML=`<div class="cd-h"><div style="font-size:20px">${si.nm.split(' ')[0]}</div><div style="flex:1"><div class="cd-nm">${si.nm}</div><div class="cd-sub">${si.ds}</div><div style="font-size:9px;color:var(--go2);font-family:Orbitron;margin-top:2px">${fS(si.cost)} in-game (${fS(Math.floor(si.cost/CONV))} real)</div></div></div><div class="cd-ft"><span></span>${own?'<span class="btn btn-ok">✅ OWNED</span>':act?'<span class="btn btn-ok">⚡ ACTIVE</span>':can?`<button class="btn btn-g" onclick="buySI('${si.id}')">BUY</button>`:`<button class="btn btn-d">🔒 ${fS(si.cost-S.bal)} short</button>`}</div>`;
+    sh.appendChild(d);
+  })}
 }
+function buyW(lv){const w=WLV[lv-1];if(!w||S.weaponLv>=lv||S.bal<w.cost)return;S.bal-=w.cost;S.weaponLv=lv;save();playSnd('col');toast(`⛏️ ${w.nm}!`);renderShop();ui()}
+function flyW(id){S.world=id;save();toast(`🚀 ${WORLDS.find(w=>w.id===id).name}!`);applyTh();ui();sw('mine')}
+function unlW(id){const w=WORLDS.find(x=>x.id===id);if(!w||S.bal<w.cost)return;S.bal-=w.cost;S.unlocked.push(id);save();flyW(id)}
+function buySI(id){const si=SHOPITEMS.find(x=>x.id===id);if(!si||S.bal<si.cost)return;S.bal-=si.cost;if(si.type==='perm')S.items[si.id]=true;else S.boosts[si.id]=Date.now()+si.dur;save();playSnd('col');toast(`✅ ${si.nm} activated!`);renderShop();ui()}
+function applyTh(){const w=gW();document.getElementById('planet').style.background=w.bg;document.getElementById('planet').textContent=w.em;document.getElementById('pbe').textContent=w.em;document.getElementById('pbn').textContent=w.name.toUpperCase();document.getElementById('pbm').textContent=w.mult+'x · Cap '+capR()+'/day';document.getElementById('pbw').textContent='Weapon Lv.'+S.weaponLv}
 
-function buyW(lv) {
-  const w = WLV[lv-1];
-  if (!w || S.weaponLv >= lv) return;
-  const freeOk = canUnlockWeaponFree(lv);
-  if (!freeOk && S.bal < w.cost) return;
-  if (!freeOk) { S.bal -= w.cost; }
-  S.weaponLv = lv;
-  save(); playSnd('col'); toast(`⚔️ ${w.nm} equipped!`); renderShop(); ui();
-}
-
-function flyW(id) {
-  S.world = id; save(); toast(`🚀 Entered ${WORLDS.find(w=>w.id===id).name}!`);
-  applyTh(); ui(); sw('mine');
-}
-
-function unlW(id, free) {
-  const w = WORLDS.find(x => x.id === id);
-  if (!w) return;
-  if (!free) {
-    if (S.bal < w.boostCost) return;
-    const fee = Math.floor(w.boostCost * DEV_FEE);
-    S.bal -= w.boostCost;
-    sendFee('world_boost', w.boostCost, fee).catch(()=>{});
-  }
-  S.unlocked.push(id); save(); flyW(id);
-}
-
-function buySI(id) {
-  const si = SHOPITEMS.find(x => x.id === id);
-  if (!si || S.bal < si.cost) return;
-  const fee = Math.floor(si.cost * DEV_FEE);
-  S.bal -= si.cost;
-  if (si.type === 'perm') S.items[si.id] = true;
-  else S.boosts[si.id] = Date.now() + si.dur;
-  sendFee('shop_purchase', si.cost, fee).catch(()=>{});
-  save(); playSnd('col'); toast(`✅ ${si.nm} activated!`); renderShop(); ui();
-}
-
-function applyTh() {
-  const w = gW(), wl = gWL();
-  const planet = document.getElementById('planet');
-  planet.style.background = w.bg;
-  planet.textContent = w.em;
-  const bonus = w.lbBonus > 0 ? ` · +${Math.round(w.lbBonus*100)}% score` : '';
-  document.getElementById('pbe').textContent = w.em;
-  document.getElementById('pbn').textContent = w.name.toUpperCase();
-  document.getElementById('pbm').textContent = `Tap: ${fS(tapV())} · Cap 500/day${bonus}`;
-  document.getElementById('pbw').textContent = `Weapon Lv.${S.weaponLv}`;
-}
-
-// ═══ RANK ═══
-function renderRank() {
-  const ri = getRankInfo(S.totalEarned);
-  const ms = S.mClm ? 0 : (S.ms||0);
-  const el = document.getElementById('lm');
-  if (el) el.innerHTML = `<div class="lb-p" style="color:${S.mClm?'var(--re)':'var(--v2)'}">${S.mClm?'❌':'#?'}</div><div style="flex:1"><div style="font-size:10px;font-weight:700;font-family:'Orbitron';color:var(--v2)">${S.pname||'You'} ${ri.icon}</div><div style="font-size:8px;color:var(--tx3)">${S.mClm?'Claimed — not eligible this month':'✅ Eligible for 2.5M prize'}</div></div><div class="lb-s">${fS(ms)}</div>`;
-  const ll = document.getElementById('ll');
-  if (ll) ll.innerHTML = '<div style="text-align:center;padding:12px;color:var(--tx3);font-size:10px">Loading leaderboard...</div>';
+// ═══ RANK (server-based) ═══
+function renderRank(){
+  const ms=S.mClm?0:S.me;
+  const el=document.getElementById('lm');
+  if(el)el.innerHTML=`<div class="lb-p" style="color:var(--v2)">${S.mClm?'❌':'#?'}</div><div style="flex:1"><div style="font-size:10px;font-weight:700;font-family:Orbitron;color:var(--v2)">${S.pname||'You'}</div><div style="font-size:8px;color:var(--tx3)">${S.mClm?'Claimed this month — not eligible':'✅ Eligible'}</div></div><div class="lb-s">${fS(ms)}</div>`;
+  // Server leaderboard
+  const ll=document.getElementById('ll');
+  if(ll)ll.innerHTML='<div style="text-align:center;padding:12px;color:var(--tx3);font-size:10px">Loading from server...</div>';
   fetchLB();
 }
-
-async function fetchLB() {
-  const ll = document.getElementById('ll'); if (!ll) return;
-  try {
-    const r = await fetch('/api/leaderboard'), d = await r.json();
-    if (d.players && d.players.length) {
-      ll.innerHTML = '';
-      d.players.slice(0, 30).forEach((p, i) => {
-        const pos = i+1, pc = pos===1?'g':pos===2?'s':pos===3?'b':'';
-        const pl  = pos<=3 ? ['','🥇','🥈','🥉'][pos] : pos;
-        const row = document.createElement('div'); row.className = 'lb-r';
-        row.innerHTML = `<div class="lb-p ${pc}">${pl}</div><div class="lb-n">${p.name||'Miner'}</div><div class="lb-s">${fS(p.score)}</div>`;
-        ll.appendChild(row);
+async function fetchLB(){
+  const ll=document.getElementById('ll');if(!ll)return;
+  try{
+    const r=await fetch('/api/leaderboard');const d=await r.json();
+    if(d.players&&d.players.length){
+      ll.innerHTML='';d.players.slice(0,30).forEach((p,i)=>{
+        const pos=i+1,pc=pos===1?'g':pos===2?'s':pos===3?'b':'';
+        const pl=pos<=3?['','🥇','🥈','🥉'][pos]:pos;
+        const r=document.createElement('div');r.className='lb-r';
+        r.innerHTML=`<div class="lb-p ${pc}">${pl}</div><div class="lb-n">${p.name||'Miner'}</div><div class="lb-s">${fS(p.score)}</div>`;
+        ll.appendChild(r);
       });
-      const myPos = d.players.findIndex(p => p.userId === S.refCode);
-      myRankPos = myPos >= 0 ? myPos + 1 : null;
-      if (myRankPos) {
-        document.getElementById('prank').textContent = `Rank #${myRankPos}`;
-        document.getElementById('rs-pos').textContent = `#${myRankPos}`;
-      }
-    } else {
-      ll.innerHTML = '<div style="text-align:center;padding:12px;color:var(--tx3);font-size:10px">No players yet. Be the first!</div>';
-    }
-  } catch(e) {
-    ll.innerHTML = '<div style="text-align:center;padding:12px;color:var(--tx3);font-size:10px">Syncing leaderboard...</div>';
-  }
-}
-
-// ═══ FEE HELPER ═══
-async function sendFee(action, base, fee) {
-  if (!fee || fee <= 0) return;
-  await fetch('/api/fee', {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({userId:S.refCode, action, baseAmount:base, fee, ts:Date.now(), wallet:S.walletAddr})
-  }).catch(()=>{});
+      // Find my position
+      const myPos=d.players.findIndex(p=>p.userId===S.refCode);
+      if(myPos>=0)document.getElementById('prank').textContent='Rank #'+(myPos+1);
+    }else{ll.innerHTML='<div style="text-align:center;padding:12px;color:var(--tx3);font-size:10px">No players yet. Be the first!</div>'}
+  }catch(e){ll.innerHTML='<div style="text-align:center;padding:12px;color:var(--tx3);font-size:10px">Leaderboard syncs when online.</div>'}
 }
 
 // ═══ CREW ═══
-function setupCr() {
-  document.getElementById('rlt').textContent = `t.me/nexusmine_bot?ref=${S.refCode}`;
-  document.getElementById('rc').textContent = S.refs;
-  document.getElementById('rb').textContent = fS(S.refs * 500000);
-}
-function copyRef() { navigator.clipboard.writeText(`t.me/nexusmine_bot?ref=${S.refCode}`).catch(()=>{}); toast('🔗 Link copied!'); }
-function shareRef() {
-  const u = `https://t.me/share/url?url=t.me%2Fnexusmine_bot%3Fref%3D${S.refCode}&text=%E2%9B%8F%20Mine%20%24NEXUS%20with%20me!`;
-  if (window.Telegram?.WebApp) window.Telegram.WebApp.openTelegramLink(u);
-  else window.open(u, '_blank');
-}
+function setupCr(){document.getElementById('rlt').textContent=`t.me/nexusmine_bot?ref=${S.refCode}`;document.getElementById('rc').textContent=S.refs;document.getElementById('rb').textContent=fS(S.refs*500)}
+function copyRef(){navigator.clipboard.writeText(`t.me/nexusmine_bot?ref=${S.refCode}`).catch(()=>{});toast('🔗 Copied!')}
+function shareRef(){const u=`https://t.me/share/url?url=t.me%2Fnexusmine_bot%3Fref%3D${S.refCode}&text=%E2%9B%8F%20Mine%20%24NEXUS%20with%20me!`;if(window.Telegram?.WebApp)window.Telegram.WebApp.openTelegramLink(u);else window.open(u,'_blank')}
 
-// ═══ UI MASTER UPDATE ═══
-function ui() {
+// ═══ FAQ ═══
+function renderFAQ(){const el=document.getElementById('fl');if(!el)return;el.innerHTML='';FAQS.forEach(f=>{const d=document.createElement('div');d.className='fq';d.innerHTML=`<div class="fq-q">${f.q}</div><div class="fq-a">${f.a}</div>`;d.onclick=()=>d.classList.toggle('open');el.appendChild(d)})}
+
+// ═══ UI ═══
+function ui(){
   tickP();
-  tickStake();
-  if (S.dk !== dk()) { S.dk = dk(); S.de = 0; S.dayTaps = 0; save(); }
-  if (S.mk !== mk()) { S.mk = mk(); S.ms = 0; S.mClm = false; save(); }
-
-  const ri = getRankInfo(S.totalEarned);
-  const capIg = capIG();
-
-  // Balance bar
-  document.getElementById('bdisp').textContent   = fS(S.bal);
-  document.getElementById('tv-d').textContent    = '+' + fS(tapV());
-  document.getElementById('real-eq').textContent = fS(Math.floor(S.bal / CONV));
-  document.getElementById('de').textContent      = fS(S.de) + '/' + fS(capIg);
-  document.getElementById('cap-pct').textContent = Math.min(100, Math.floor(S.de / capIg * 100)) + '%';
-
-  // Rank strip
-  document.getElementById('rs-icon').textContent = ri.icon;
-  document.getElementById('rs-rank').textContent = ri.name;
-  document.getElementById('rs-score').textContent= fS(S.ms||0);
-  document.getElementById('rs-pos').textContent  = myRankPos ? '#'+myRankPos : '#?';
-  document.getElementById('rs-day').textContent  = daysPlaying();
-
-  // Topbar
-  const nm = S.pname || 'Miner';
-  document.getElementById('pname').textContent   = nm;
-  document.getElementById('av').childNodes[0].textContent = nm.slice(0,2).toUpperCase();
-  document.getElementById('rankdot').textContent = ri.icon;
-  document.getElementById('prank').textContent   = `${ri.icon} ${ri.name}`;
-
-  // Mine stats
-  const pr = passRate(), mx = pr * 3, sp = Math.min(S.storedP||0, mx);
-  document.getElementById('scc').textContent = fS(sp);
-  document.getElementById('scm').textContent = fS(mx);
-  document.getElementById('scf').style.width = (mx>0 ? Math.min(100,sp/mx*100) : 0) + '%';
-
-  const now2  = Date.now();
-  const canCol= sp > 0 && (now2 - (S.lastCol||0)) >= PASCD;
-  const cb    = document.getElementById('col-btn');
-  if (canCol) { cb.className='rdy'; cb.textContent=`⬇️ Collect ${fS(sp)} pts`; }
-  else if (sp > 0) { const r=PASCD-(now2-(S.lastCol||0)); cb.className='off'; cb.textContent=`⏳ ${Math.ceil(Math.max(0,r)/60000)}m until collect`; }
-  else { cb.className='off'; cb.textContent='⬇️ Mining passively...'; }
-
-  document.getElementById('t-taps').textContent  = fS(S.dayTaps);
-  document.getElementById('t-score').textContent = fS(S.ms||0);
-  document.getElementById('t-real').textContent  = fS(Math.floor(S.bal/CONV));
-
+  if(S.dk!==dk()){S.dk=dk();S.de=0;S.dayTaps=0;save()}
+  if(S.mk!==mk()){S.mk=mk();S.me=0;S.mClm=false;save()}
+  document.getElementById('bdisp').textContent=fS(S.bal);
+  document.getElementById('tv-d').textContent='+'+fS(tapV());
+  document.getElementById('real-eq').textContent=fS(Math.floor(S.bal/CONV));
+  document.getElementById('de').textContent=fS(S.de);
+  document.getElementById('dc').textContent=fS(capIG());
+  document.getElementById('dc2').textContent=capR();
+  const pr=passRate(),mx=pr*3,sp=Math.min(S.storedP||0,mx);
+  document.getElementById('scc').textContent=fS(sp);document.getElementById('scm').textContent=fS(mx);
+  document.getElementById('scf').style.width=(mx>0?Math.min(100,sp/mx*100):0)+'%';
+  const canCol=sp>0&&(Date.now()-(S.lastCol||0))>=PASCD;
+  const cb=document.getElementById('col-btn');
+  if(canCol){cb.className='rdy';cb.textContent=`⬇️ Collect ${fS(sp)} $NEXUS`}
+  else if(sp>0){const r=PASCD-(Date.now()-(S.lastCol||0));cb.className='off';cb.textContent=`⏳ ${Math.ceil(Math.max(0,r)/60000)}m until collect`}
+  else{cb.className='off';cb.textContent='⬇️ Mining...'}
+  document.getElementById('t-taps').textContent=fS(S.dayTaps);
+  document.getElementById('t-real').textContent=fS(Math.floor(S.bal/CONV));
+  const nm=S.pname||'Miner';document.getElementById('pname').textContent=nm;document.getElementById('av').textContent=nm.slice(0,2).toUpperCase();
   updClm();
-  applyTh();
 }
 
 // ═══ NAV ═══
-function sw(t) {
-  document.querySelectorAll('.pnl').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
-  const p = document.getElementById('p-'+t), b = document.getElementById('n-'+t);
-  if (p) p.classList.add('on'); if (b) b.classList.add('on');
-  if (t==='shop')  renderShop();
-  if (t==='stake') renderStake();
-  if (t==='vault') { renderV(); updClm(); }
-  if (t==='rank')  renderRank();
-  if (t==='crew')  setupCr();
-  if (t==='mine')  applyTh();
+function sw(t){
+  document.querySelectorAll('.pnl').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  const p=document.getElementById('p-'+t),b=document.getElementById('n-'+t);if(p)p.classList.add('on');if(b)b.classList.add('on');
+  if(t==='shop')renderShop();if(t==='vault'){renderV();updClm()}if(t==='rank')renderRank();if(t==='crew')setupCr();if(t==='faq')renderFAQ();if(t==='mine')applyTh();
 }
 
 // ═══ TOAST ═══
-let tQ = [], tB = false;
-function toast(m) { tQ.push(m); if (!tB) nT(); }
-function nT() {
-  if (!tQ.length) { tB=false; return; } tB=true;
-  const t = document.getElementById('toast'); t.textContent = tQ.shift(); t.classList.add('on');
-  setTimeout(() => { t.classList.remove('on'); setTimeout(nT, 250); }, 2000);
-}
+let tQ=[],tB=false;function toast(m){tQ.push(m);if(!tB)nT()}function nT(){if(!tQ.length){tB=false;return}tB=true;const t=document.getElementById('toast');t.textContent=tQ.shift();t.classList.add('on');setTimeout(()=>{t.classList.remove('on');setTimeout(nT,250)},2000)}
 
-// ═══ STARFIELD BG ═══
-function initBG() {
-  const c = document.getElementById('bgc'), x = c.getContext('2d');
-  function r() { c.width = innerWidth; c.height = innerHeight; } r();
-  addEventListener('resize', r);
-  const s = Array.from({length:80}, () => ({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.3+.2,o:Math.random()*.5+.1,t:Math.random()*6.28}));
-  (function f() {
-    x.clearRect(0,0,c.width,c.height);
-    s.forEach(s => { s.t+=.01; x.beginPath(); x.arc(s.x,s.y,s.r,0,6.28); x.fillStyle=`rgba(168,140,255,${s.o*(.5+.5*Math.sin(s.t))})`;x.fill(); });
-    requestAnimationFrame(f);
-  }());
-}
+// ═══ BG ═══
+function initBG(){const c=document.getElementById('bgc'),x=c.getContext('2d');function r(){c.width=innerWidth;c.height=innerHeight}r();addEventListener('resize',r);const s=Array.from({length:80},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.3+.2,o:Math.random()*.5+.1,t:Math.random()*6.28}));(function f(){x.clearRect(0,0,c.width,c.height);s.forEach(s=>{s.t+=.01;x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fillStyle=`rgba(168,140,255,${s.o*(.5+.5*Math.sin(s.t))})`;x.fill()});requestAnimationFrame(f)}())}
 
-// ═══ TELEGRAM ═══
-function initTG() {
-  if (window.Telegram?.WebApp) {
-    const t = window.Telegram.WebApp; t.expand();
-    try { t.setHeaderColor('#03000A'); } catch(e) {}
-    if (t.initDataUnsafe?.user && !S.pname) {
-      S.pname = t.initDataUnsafe.user.first_name || 'Miner'; save();
-    }
-  }
-}
+// ═══ TG ═══
+function initTG(){if(window.Telegram?.WebApp){const t=window.Telegram.WebApp;t.expand();try{t.setHeaderColor('#03000A')}catch(e){}if(t.initDataUnsafe?.user&&!S.pname){S.pname=t.initDataUnsafe.user.first_name||'Miner';save()}}}
 
 // ═══ TON CONNECT ═══
-async function initTC() {
-  try {
-    await new Promise((ok, no) => {
-      const s = document.createElement('script');
-      s.src = 'https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js';
-      s.onload=ok; s.onerror=no; document.head.appendChild(s);
-    });
-  } catch(e) { return; }
-  try {
-    const C = typeof TonConnectUI!=='undefined' ? TonConnectUI
-            : typeof TON_CONNECT_UI!=='undefined' ? TON_CONNECT_UI.TonConnectUI : null;
-    if (!C) return;
-    tonConnectUI = new C({manifestUrl: location.origin+'/api/manifest', buttonRootId:null});
-    tonConnectUI.onStatusChange(w => {
-      if (w) { tcW = w.account.address; updW(true); toast('💳 Wallet connected!'); }
-      else   { tcW = null; updW(false); }
-    });
-    if (tonConnectUI.wallet) { tcW = tonConnectUI.wallet.account.address; updW(true); }
-  } catch(e) {}
+async function initTC(){
+  try{await new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}catch(e){return}
+  try{const C=typeof TonConnectUI!=='undefined'?TonConnectUI:(typeof TON_CONNECT_UI!=='undefined'?TON_CONNECT_UI.TonConnectUI:null);if(!C)return;
+  tonConnectUI=new C({manifestUrl:location.origin+'/api/manifest',buttonRootId:null});
+  tonConnectUI.onStatusChange(w=>{if(w){tcW=w.account.address;updW(true);toast('💳 Connected!')}else{tcW=null;updW(false)}});
+  if(tonConnectUI.wallet){tcW=tonConnectUI.wallet.account.address;updW(true)}}catch(e){}
 }
 
 // ═══ SYNC ═══
-async function sync() {
-  if (!navigator.onLine) return;
-  try {
-    await fetch('/api/sync', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        userId:S.refCode, gameState:JSON.stringify(S),
-        totalEarned:S.totalEarned, totalTaps:S.totalTaps,
-        monthScore:S.ms||0, monthClaimed:S.mClm,
-        stakedV:S.stakedV||0,
-        wallet:S.walletAddr||null, name:S.pname
-      })
-    });
-  } catch(e) {}
-}
+async function sync(){if(!navigator.onLine)return;try{await fetch('/api/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:S.refCode,gameState:JSON.stringify(S),totalEarned:S.totalEarned,totalTaps:S.totalTaps,monthEarned:S.me,monthClaimed:S.mClm,wallet:S.walletAddr||null,name:S.pname})})}catch(e){}}
 
 // ═══ BOOT ═══
-window.addEventListener('load', () => {
-  initBG(); initS(); initTG(); initAud();
-  if (!S.pname) { S.pname = 'Miner_' + S.refCode.slice(0,4); save(); }
-  S.ss = Date.now(); applyTh(); ui();
-  setTimeout(initTC, 800);
-  setInterval(() => { tickP(); tickStake(); ui(); }, 5000);
-  setInterval(sync, 30000);
-  setInterval(updClm, 1000);
-  const fk = 'nxs_v10_w';
-  if (!localStorage.getItem(fk)) {
-    localStorage.setItem(fk, '1');
-    setTimeout(() => toast('🚀 Welcome to NEXUS MINE!'), 500);
-    setTimeout(() => toast('⛏️ Tap to earn millions of points!'), 2600);
-    setTimeout(() => toast('💎 Real claims every 96h · Leaderboard 2.5M!'), 4700);
-  }
+window.addEventListener('load',()=>{
+  initBG();initS();initTG();initAud();
+  if(!S.pname){S.pname='Miner_'+S.refCode.slice(0,4);save()}
+  S.ss=Date.now();applyTh();ui();
+  setTimeout(initTC,700);
+  setInterval(()=>{tickP();ui()},5000);
+  setInterval(sync,30000);
+  setInterval(updClm,1000);
+  if(!localStorage.getItem('nxs_v9w')){localStorage.setItem('nxs_v9w','1');setTimeout(()=>toast('🚀 Welcome to NEXUS MINE!'),400);setTimeout(()=>toast('⛏️ Tap the planet to earn $NEXUS!'),2500);setTimeout(()=>toast('💎 Claim real tokens every 72h!'),4500)}
 });
 </script>
 </body>
