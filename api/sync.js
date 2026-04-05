@@ -1,5 +1,6 @@
 /**
  * POST /api/sync — saves game state + leaderboard data
+ * Accepts monthScore (v10) or monthEarned (older versions)
  */
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -24,7 +25,9 @@ export default async function handler(req, res) {
       name: name || null,
       lastSync: Date.now()
     }));
-  } catch (e) {}
+  } catch (e) {
+    console.warn('[sync] KV error:', e.message);
+  }
 
   return res.status(200).json({ ok: true });
 }
