@@ -477,7 +477,7 @@ function initTG(){if(window.Telegram?.WebApp){const t=window.Telegram.WebApp;t.e
 async function initTC(){
   try{await new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}catch(e){return}
   try{const C=typeof TonConnectUI!=='undefined'?TonConnectUI:(typeof TON_CONNECT_UI!=='undefined'?TON_CONNECT_UI.TonConnectUI:null);if(!C)return;
-  tonConnectUI=new C({manifestUrl:location.origin+'/api/manifest',buttonRootId:null});
+  tonConnectUI=new C({manifestUrl:location.origin+'/api/manifest?v='+Date.now(),buttonRootId:null});
   tonConnectUI.onStatusChange(w=>{if(w){tcW=w.account.address;updW(true);toast('💳 Connected!')}else{tcW=null;updW(false)}});
   if(tonConnectUI.wallet){tcW=tonConnectUI.wallet.account.address;updW(true)}}catch(e){}
 }
